@@ -9,6 +9,7 @@ from agent_inspect.models.metrics import (
     AgentDialogueTrace,
     AgentResponse,
     EvaluationSample,
+    NumericalScore,
     Step,
     SubGoal,
     SubGoalValidationResult,
@@ -204,3 +205,24 @@ def test_no_auc_score(mock_sub_goal_1, mock_sub_goal_2):
             match="Internal Code: 050005, Error Message: No progress score produced for AUC calculation.",
         ):
             auc_metric.evaluate(mock_agent_dialogue_trace, mock_evaluation_data_sample)
+
+
+def test_auc_from_progress_scores_linear_ramp():
+    # x is spread evenly over [0, 1]; a straight 0->1 ramp encloses half the unit square.
+    progress_scores = [NumericalScore(s) for s in (0.0, 0.25, 0.5, 0.75, 1.0)]
+    result = AUC.get_auc_score_from_progress_scores(progress_scores)
+    assert result.score == 0.5
+
+
+def test_auc_from_progress_scores_constant_curve():
+    # A flat progress curve encloses a rectangle of height 0.6 over the unit x-range.
+    progress_scores = [NumericalScore(0.6) for _ in range(4)]
+    result = AUC.get_auc_score_from_progress_scores(progress_scores)
+    assert result.score == 0.6
+
+
+def test_auc_from_progress_scores_empty_raises():
+    with pytest.raises(
+        InvalidInputValueError, match="No progress score provided for AUC calculation."
+    ):
+        AUC.get_auc_score_from_progress_scores([])
