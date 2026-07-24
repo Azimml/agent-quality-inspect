@@ -71,3 +71,30 @@ def test_pass_at_k_error_k_zero():
 def test_pass_at_k_error_n_trials_zero():
     with pytest.raises(EvaluationError, match="num_trials .* must be provided"):
         PassAtK(config={K_VALUE: 2, NO_OF_TRIALS: 0})
+
+
+def test_pass_at_k_k_one_equals_success_fraction():
+    # pass@1 = 1 - C(n-s,1)/C(n,1) = 1 - (n-s)/n = s / n, i.e. the success rate.
+    metric = PassAtK(config={K_VALUE: 1, NO_OF_TRIALS: 4})
+    success_scores = [NumericalScore(x) for x in [1, 0, 1, 0]]
+    result = metric.compute(success_scores)
+    assert abs(result.score - 0.5) < 1e-6
+
+
+def test_pass_at_k_rejects_non_binary_score():
+    metric = PassAtK(config={K_VALUE: 2, NO_OF_TRIALS: 3})
+    success_scores = [NumericalScore(1), NumericalScore(2), NumericalScore(0)]
+    with pytest.raises(
+        EvaluationError,
+        match="Each score in scorer_results should be either 0 or 1, but got .*",
+    ):
+        metric.compute(success_scores)
+
+
+def test_pass_at_k_single_success_full_k():
+    # With k == num_trials, a single success guarantees the one drawn sample set
+    # contains it, so pass@k == 1.0.
+    metric = PassAtK(config={K_VALUE: 4, NO_OF_TRIALS: 4})
+    success_scores = [NumericalScore(x) for x in [1, 0, 0, 0]]
+    result = metric.compute(success_scores)
+    assert result.score == 1.0
