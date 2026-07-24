@@ -77,7 +77,7 @@ class ProgressScore(ProgressBasedMetric):
         self,
         agent_trace: AgentDialogueTrace,
         evaluation_data_sample: EvaluationSample,
-    ):
+    ) -> NumericalScore:
         """
         Returns a progress score given the agent trace and the evaluation data sample.
 
@@ -223,7 +223,7 @@ class ProgressScoresThroughTurns(ProgressBasedMetric):
         self,
         agent_trace: AgentDialogueTrace,
         evaluation_data_sample: EvaluationSample,
-    ):
+    ) -> list[NumericalScore]:
         """
         Returns a list of progress scores at every turn until ``max_turns`` given the agent trace and the evaluation data sample.
 
