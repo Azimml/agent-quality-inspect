@@ -187,3 +187,19 @@ def test_total_token_count_no_error(mock_turn_trace_1, mock_turn_trace_3):
     total_token_count_metric = TotalTokenConsumption()
     total_token_count = total_token_count_metric.evaluate([mock_turn_trace_1, mock_turn_trace_3])
     assert total_token_count.score == 345
+
+
+def test_total_token_count_equals_sum_of_components(mock_turn_trace_1, mock_turn_trace_3):
+    # The total must always equal input + output + reasoning computed separately.
+    traces = [mock_turn_trace_1, mock_turn_trace_3]
+    total = TotalTokenConsumption().evaluate(traces).score
+    components = (
+        InputTotalTokenCount().evaluate(traces).score
+        + OutputTotalTokenCount().evaluate(traces).score
+        + ReasoningTotalTokenCount().evaluate(traces).score
+    )
+    assert total == components
+
+
+def test_total_token_count_empty_trace_is_zero():
+    assert TotalTokenConsumption().evaluate([]).score == 0
