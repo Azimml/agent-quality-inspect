@@ -115,3 +115,20 @@ def test_average_latency_multiple_missing_latency_list_all_error(
         exc_info.value.message
         == "Internal Code: 050008, Error Message: Turn(s): 4, 5 are missing latency values."
     )
+
+
+def test_average_latency_empty_list_is_zero():
+    # With no turns the average is defined as 0.0 rather than a division error.
+    average_latency_metric = AverageLatency()
+    assert average_latency_metric.evaluate([]).score == 0.0
+
+
+def test_average_latency_rounds_to_four_decimals(
+    mock_turn_trace_1, mock_turn_trace_2, mock_turn_trace_3
+):
+    # (100 + 150 + 0) / 3 = 83.3333... rounds to 4 decimal places.
+    average_latency_metric = AverageLatency()
+    score = average_latency_metric.evaluate(
+        [mock_turn_trace_1, mock_turn_trace_2, mock_turn_trace_3]
+    )
+    assert score.score == 83.3333
