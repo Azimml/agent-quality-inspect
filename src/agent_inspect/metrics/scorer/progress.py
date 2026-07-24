@@ -146,6 +146,19 @@ class ProgressScore(ProgressBasedMetric):
     def get_progress_score_from_validation_results(
         validation_results: list[SubGoalValidationResult],
     ) -> NumericalScore:
+        """Aggregate subgoal validation results into a progress score.
+
+        The progress score is the fraction of subgoals marked complete, i.e. the
+        number of ``is_completed`` results divided by the total number of
+        results, rounded to four decimal places.
+
+        :param validation_results: The per-subgoal validation results to
+            aggregate. Must be non-empty.
+        :return: a :obj:`~agent_inspect.models.metrics.metric_score.NumericalScore`
+            holding the completion fraction in ``[0, 1]``.
+        :raises agent_inspect.exception.InvalidInputValueError: If
+            ``validation_results`` is empty.
+        """
         scores = []
         if not validation_results:
             raise InvalidInputValueError(
@@ -160,7 +173,14 @@ class ProgressScore(ProgressBasedMetric):
         return NumericalScore(score=round(sum(scores) / len(scores), 4))
 
     @staticmethod
-    def get_turn_subgoals(sub_goals: list[SubGoal], turn_index: int):
+    def get_turn_subgoals(sub_goals: list[SubGoal], turn_index: int) -> list[SubGoal]:
+        """Select the subgoals that belong to a given conversational turn.
+
+        :param sub_goals: All subgoals defined for the evaluation sample.
+        :param turn_index: The zero-based turn index to filter on.
+        :return: The subgoals whose ``turn`` equals ``turn_index`` (possibly
+            empty).
+        """
         per_turn_subgoals = []
         for sub_goal in sub_goals:
             if sub_goal.turn == turn_index:
