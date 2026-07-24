@@ -85,3 +85,21 @@ def test_tool_call_count_no_tools(mock_turn_trace_1):
     metric = ToolCallCount()
     score3 = metric.evaluate([mock_turn_trace_1])
     assert score3.score == 0
+
+
+def test_tool_call_count_empty_trace_is_zero():
+    metric = ToolCallCount()
+    assert metric.evaluate([]).score == 0
+
+
+def test_tool_call_count_ignores_step_without_tool():
+    # A step whose ``tool`` is None (e.g. a pure agent-thought step) is not a
+    # tool call and must not be counted.
+    turn = TurnTrace(
+        id="1",
+        agent_input="think only",
+        steps=[Step(id="step1", parent_ids=[], agent_thought="just thinking")],
+        agent_response=AgentResponse(response="done"),
+    )
+    metric = ToolCallCount()
+    assert metric.evaluate([turn]).score == 0
