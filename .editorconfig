@@ -1,0 +1,28 @@
+# EditorConfig helps maintain consistent coding styles across editors and IDEs.
+# https://editorconfig.org
+#
+# The settings below mirror the project's ruff configuration (see pyproject.toml)
+# so that files are formatted consistently before ruff-format ever runs.
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4
+
+[*.py]
+# ruff-format targets a 100-character line length for this project.
+max_line_length = 100
+
+[*.{yaml,yml,json,toml}]
+indent_size = 2
+
+[*.md]
+# Markdown treats trailing whitespace as a hard line break, so keep it intact.
+trim_trailing_whitespace = false
+
+[Makefile]
+indent_style = tab
