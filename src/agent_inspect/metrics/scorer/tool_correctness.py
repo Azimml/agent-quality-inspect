@@ -118,6 +118,19 @@ class ToolCorrectnessMetric(LLMBasedMetric):
     def get_tool_correctness_score_from_validation_results(
         validation_results: list[ToolCallValidationResult],
     ) -> NumericalScore:
+        """Aggregate tool-call validation results into a correctness score.
+
+        The score is the fraction of expected tool calls validated as correct,
+        i.e. the number of ``is_completed`` results divided by the total number
+        of results, rounded to four decimal places.
+
+        :param validation_results: The per-tool-call validation results to
+            aggregate. Must be non-empty.
+        :return: a :obj:`~agent_inspect.models.metrics.metric_score.NumericalScore`
+            holding the correctness fraction in ``[0, 1]``.
+        :raises agent_inspect.exception.InvalidInputValueError: If
+            ``validation_results`` is empty.
+        """
         scores = []
         if not validation_results:
             raise InvalidInputValueError(
