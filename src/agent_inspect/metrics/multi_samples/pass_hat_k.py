@@ -91,8 +91,13 @@ class PassHatK(MultiSampleMetric):
                 )
             success_count += int(obj.score)
 
+        # Fewer successes than the subset size means no all-success subset of
+        # size k exists, so pass^k is 0. This also keeps math.comb(success_count,
+        # k_value) well defined (it would otherwise be 0 anyway).
         if success_count < k_value:
             return NumericalScore(score=0.0)
 
+        # pass^k = P(a size-k subset is all successes)
+        #        = C(success_count, k) / C(num_trials, k)
         value = math.comb(success_count, k_value) / math.comb(num_trials, k_value)
         return NumericalScore(score=value)
