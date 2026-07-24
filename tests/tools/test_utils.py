@@ -52,6 +52,14 @@ def test_map_subgoal_validations_skips_invalid_completions():
     assert result == [1, 0]
 
 
+def test_map_subgoal_validations_drops_matched_but_out_of_pair_grade():
+    # "Grade: P" matches the regex capture group but "P" is not in the C/I pair,
+    # so it is treated as a non-vote and dropped rather than counted.
+    completions = ["Grade: C", "Grade: P", "Grade: I"]
+    result = map_subgoal_validations_to_binary_matrix(completions)
+    assert result == [1, 0]
+
+
 def test_map_subgoal_validations_returns_empty_for_all_invalid_completions():
     completions = ["Invalid Grade", "Another Invalid Grade"]
     result = map_subgoal_validations_to_binary_matrix(completions)
