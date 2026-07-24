@@ -91,12 +91,19 @@ class PassAtK(MultiSampleMetric):
                 )
             success_count += int(obj.score)
 
+        # With no successful trials, every sampled subset fails, so pass@k is 0.
         if success_count == 0:
             return NumericalScore(score=0.0)
 
+        # If the failures alone (num_trials - success_count) cannot fill a subset
+        # of size k, every possible subset must contain at least one success, so
+        # pass@k is exactly 1. This also guards math.comb against an all-failure
+        # subset being impossible to form.
         if (num_trials - success_count) < k_value:
             return NumericalScore(score=1.0)
 
+        # pass@k = 1 - P(a size-k subset is all failures)
+        #        = 1 - C(num_trials - success_count, k) / C(num_trials, k)
         value = 1.0 - (
             math.comb(num_trials - success_count, k_value) / math.comb(num_trials, k_value)
         )
