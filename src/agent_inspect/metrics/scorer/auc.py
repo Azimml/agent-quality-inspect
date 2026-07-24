@@ -40,7 +40,7 @@ class AUC(LLMBasedMetric):
         self,
         agent_trace: AgentDialogueTrace,
         evaluation_data_sample: EvaluationSample,
-    ):
+    ) -> NumericalScore:
         """
         Returns the value of area under the progress scores curve. Calls the :obj:`agent_inspect.metrics.scorer.progress.ProgressScoresThroughTurns.evaluate` method underneath.
 

@@ -39,7 +39,7 @@ class PPT(ProgressBasedMetric):
         self,
         agent_trace: AgentDialogueTrace,
         evaluation_data_sample: EvaluationSample,
-    ):
+    ) -> NumericalScore:
         """
         Returns the progress-per-turn (PPT) value of the list of progress scores. Calls the :obj:`agent_inspect.metrics.scorer.progress.ProgressScoresThroughTurns.evaluate` method underneath.
 
