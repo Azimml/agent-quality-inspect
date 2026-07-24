@@ -66,6 +66,12 @@ All scorer metrics take an `AgentDialogueTrace` (the agent's trajectory) and an 
 
 Because `AUC`, `PPT`, and final-turn `Success` are all derived from the same per-turn progress curve, you compute the (expensive) progress-through-turns **once** and derive the rest cheaply.
 
+Both `pass@k` and `pass^k` are unbiased estimators computed in closed form from `n` observed trials with `s` successes — no resampling required:
+
+<code>pass@k = 1 − C(n−s, k) / C(n, k)</code> &nbsp;&nbsp; <code>pass^k = C(s, k) / C(n, k)</code>
+
+At `k = 1` both collapse to the plain success rate `s / n`. As `k` grows, `pass@k` rises toward 1 (easier to get *at least one* success) while `pass^k` falls toward 0 (harder to get *all* successes) — so report `pass@k` when you care about best-of-`k` capability and `pass^k` when you care about run-to-run reliability.
+
 ---
 
 ## Quick start
