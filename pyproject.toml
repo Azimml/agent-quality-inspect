@@ -1,0 +1,109 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agent_quality_inspect"
+version = "2.3.6a1"
+description = "Evaluation package that allows benchmarking of agentic AIs from various sources and frameworks by producing statistical results which can be compared across different use cases and datasets."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [
+    { name = "Min Pyae Moe", email = "min.pyae.moe@sap.com" },
+    { name = "Marcus Duigan", email = "marcus.duigan@sap.com" },
+]
+keywords = [
+    "agent-evaluation",
+    "llm",
+    "benchmarking",
+    "llm-as-a-judge",
+    "agentic-ai",
+    "error-analysis",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Testing",
+]
+dependencies = [
+    "numpy==2.2.6",
+]
+
+[project.optional-dependencies]
+azure-openai = [
+    "openai==2.29.0",
+    "backoff==2.2.1",
+]
+
+[project.urls]
+Homepage = "https://github.com/Azimml/agent-quality-inspect"
+Repository = "https://github.com/Azimml/agent-quality-inspect"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["agent_inspect", "agent_inspect.*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+# Lint/format scope is the maintained package plus its tests. The vendored
+# tau2-bench subproject carries its own toolchain, and demo/paper_experiments/
+# docs are illustrative artifacts that are not held to the package's lint rules.
+# This makes a bare `ruff check .` match what CI enforces (`ruff check src tests`).
+extend-exclude = ["agent_runners", "demo", "paper_experiments", "docs"]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "F",   # pyflakes
+    "I",   # isort (import ordering)
+    "UP",  # pyupgrade (modern syntax for the supported Python floor)
+    "B",   # flake8-bugbear
+    "SIM", # flake8-simplify
+    "RUF", # ruff-specific rules
+]
+ignore = [
+    "E501",   # line length is governed by `ruff format`; long docstrings and
+              # prompt templates are intentionally left unwrapped.
+    "B008",   # function calls in argument defaults are used intentionally.
+    "RUF001", # LLM prompt templates use typographic characters (apostrophes,
+              # arrows) deliberately; do not flag them as ambiguous unicode.
+    "RUF022", # __all__ is grouped by category with comments on purpose; keep the
+              # human-readable ordering rather than forcing alphabetical.
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Test files use pytest.raises(match=...) with regex-shaped literals that are
+# intentional and readable as-is.
+"tests/**" = ["RUF043"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["agent_inspect"]
+
+[tool.pytest.ini_options]
+# Collect only the maintained package's tests. The vendored agent_runners/
+# tau2-bench subproject ships its own tests that import the separately-installed
+# `tau2` package; collecting them at the repo root raises ImportError. Scoping
+# testpaths here makes a bare `pytest` match what CI runs (`pytest tests`).
+testpaths = ["tests"]
+
+[tool.mypy]
+python_version = "3.10"
+files = ["src/agent_inspect"]
+# Advisory configuration: surfaces type issues without failing the build while
+# type coverage is being extended. Tighten these toggles as annotations land.
+ignore_missing_imports = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+no_implicit_optional = true
+check_untyped_defs = true

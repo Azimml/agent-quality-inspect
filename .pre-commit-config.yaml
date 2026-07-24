@@ -1,0 +1,28 @@
+# Pre-commit hooks for agent-quality-inspect.
+# Install with:  pip install pre-commit && pre-commit install
+# Run on demand: pre-commit run --all-files
+#
+# Ruff is configured in pyproject.toml ([tool.ruff]); these hooks enforce the
+# same lint + format rules on the core package and its tests. The vendored
+# third-party snapshot under agent_runners/tau2-bench/ is intentionally excluded.
+exclude: '^agent_runners/tau2-bench/'
+
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.16.0
+    hooks:
+      - id: ruff
+        name: ruff (lint)
+        args: [--fix]
+      - id: ruff-format
+        name: ruff (format)
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-yaml
+      - id: check-toml
+      - id: check-merge-conflict
+      - id: check-added-large-files
