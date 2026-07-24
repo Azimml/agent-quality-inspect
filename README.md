@@ -241,6 +241,10 @@ ruff format src tests         # format
 python -m pytest              # run the unit test suite
 ```
 
+A `Makefile` wraps these into convenience targets (`make lint`, `make format`, `make test`, and `make check` for the full pre-push gate); run `make help` for the full list. See [`CONTRIBUTING.md`](./CONTRIBUTING.md) for the complete contributor workflow.
+
+The test suite is fully offline — LLM-backed metrics are exercised through mocks, so no API keys are required to run `python -m pytest`. For a runnable, dependency-light tour of the numerical metrics, see [`examples/metrics_quickstart.py`](./examples/metrics_quickstart.py).
+
 CI runs the linter plus the full test suite on Linux across Python 3.10–3.13, and publishes to PyPI via trusted publishing (OIDC) on release. The vendored `agent_runners/tau2-bench/` snapshot is third-party and excluded from linting.
 
 ---
