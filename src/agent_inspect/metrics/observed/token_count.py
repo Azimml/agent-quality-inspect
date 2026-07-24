@@ -40,7 +40,20 @@ class TokenConsumptionMetric(ObservedMetric):
         ...
 
     @staticmethod
-    def evaluate_by_field(agent_turn_traces: list[TurnTrace], field: str):
+    def evaluate_by_field(agent_turn_traces: list[TurnTrace], field: str) -> NumericalScore:
+        """Sum a single token-consumption field across every step of every turn.
+
+        Turns without steps are skipped (a warning is logged), and steps whose
+        ``field`` is ``None`` contribute zero, so the count is robust to partially
+        populated traces.
+
+        :param agent_turn_traces: The per-turn traces to sum over.
+        :param field: The :obj:`~agent_inspect.models.metrics.agent_trace.Step`
+            attribute name to accumulate (for example the input, output, or
+            reasoning token consumption field).
+        :return: a :obj:`~agent_inspect.models.metrics.metric_score.NumericalScore`
+            holding the total token count for ``field``.
+        """
         total_token_count = 0
         for turn_trace in agent_turn_traces:
             if not turn_trace.steps:
