@@ -9,6 +9,7 @@ from agent_inspect.models.metrics import (
     AgentDialogueTrace,
     AgentResponse,
     EvaluationSample,
+    NumericalScore,
     Step,
     SubGoal,
     SubGoalValidationResult,
@@ -248,3 +249,23 @@ def test_no_progress_score_error():
         InvalidInputValueError, match="No progress score provided for PPT calculation."
     ):
         ppt_metric.get_ppt_score_from_progress_scores([])
+
+
+def test_ppt_from_scores_uses_earliest_turn_reaching_max():
+    # Peak progress 1.0 is first reached at index 2 (turn 3), so PPT = 1.0 / 3.
+    progress_scores = [NumericalScore(s) for s in (0.5, 0.5, 1.0, 1.0)]
+    result = PPT.get_ppt_score_from_progress_scores(progress_scores)
+    assert abs(result.score - (1.0 / 3.0)) < 1e-6
+
+
+def test_ppt_from_scores_single_turn_equals_progress():
+    # A single turn divides the peak by (0 + 1), so PPT equals the progress.
+    result = PPT.get_ppt_score_from_progress_scores([NumericalScore(0.75)])
+    assert abs(result.score - 0.75) < 1e-6
+
+
+def test_ppt_from_scores_immediate_completion_is_one():
+    # Full progress on the very first turn is the best possible PPT of 1.0.
+    progress_scores = [NumericalScore(s) for s in (1.0, 1.0, 1.0)]
+    result = PPT.get_ppt_score_from_progress_scores(progress_scores)
+    assert result.score == 1.0
