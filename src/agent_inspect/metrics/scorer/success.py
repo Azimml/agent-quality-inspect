@@ -141,7 +141,7 @@ class SuccessScore(SuccessBasedMetric):
         self,
         agent_trace: AgentDialogueTrace,
         evaluation_data_sample: EvaluationSample,
-    ):
+    ) -> NumericalScore:
         """
         Returns a success score given the agent trace and the evaluation data sample.
         Calls the :obj:`agent_inspect.metrics.scorer.progress.ProgressScore.evaluate` and :obj:`agent_inspect.metrics.scorer.success.SuccessBasedMetric.get_success_score_from_progress_score` methods underneath.
@@ -204,7 +204,7 @@ class SuccessScoreFinalTurn(SuccessBasedMetric):
         self,
         agent_trace: AgentDialogueTrace,
         evaluation_data_sample: EvaluationSample,
-    ):
+    ) -> NumericalScore:
         """
         Returns a success score at the final conversational turn :math:`T` given the agent trace and the evaluation data sample.
         Calls the :obj:`agent_inspect.metrics.scorer.progress.ProgressScoresThroughTurns.evaluate` and :obj:`agent_inspect.metrics.scorer.success.SuccessBasedMetric.get_success_score_from_progress_score` methods underneath.
