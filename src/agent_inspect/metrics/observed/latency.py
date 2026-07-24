@@ -79,7 +79,7 @@ class AverageLatency(LatencyMetric):
     def evaluate(
         self,
         agent_turn_traces: list[TurnTrace],
-    ):
+    ) -> NumericalScore:
         """
         Calculate the average latency of the agent's response.
 
