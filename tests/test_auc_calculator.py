@@ -121,6 +121,29 @@ def test_auc_matches_sklearn_edge_case_two_points():
     assert abs(custom_result - sklearn_result) < 1e-10
 
 
+def test_auc_zero_width_segment_matches_sklearn():
+    """A repeated x value (zero-width trapezoid) contributes no area."""
+    # The [0, 0] segment has zero width; only the [0, 1] segment carries area.
+    x = [0, 0, 1]
+    y = [0, 1, 1]
+    assert auc(x, y) == sklearn.metrics.auc(x, y) == 1.0
+
+
+def test_auc_negative_y_matches_sklearn():
+    """AUC handles negative y values the same way sklearn does."""
+    x = [0, 1, 2]
+    y = [-1, -1, -1]
+    assert auc(x, y) == sklearn.metrics.auc(x, y) == -2.0
+
+
+def test_auc_all_equal_x_is_degenerate_zero():
+    """When every x is identical there is no width, so the area collapses to 0."""
+    # sklearn rejects this input, but our implementation treats an all-equal
+    # (zero-diff) x as monotonic and returns a zero-magnitude area.
+    result = auc([1, 1, 1], [0, 1, 2])
+    assert result == 0.0
+
+
 def test_auc_matches_sklearn_constant_y():
     """Test with constant y values (rectangle) matches sklearn."""
     x = [0, 0.25, 0.5, 0.75, 1.0]
