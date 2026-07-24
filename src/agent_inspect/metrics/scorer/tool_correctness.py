@@ -42,7 +42,7 @@ class ToolCorrectnessMetric(LLMBasedMetric):
         self,
         agent_trace: AgentDialogueTrace,
         evaluation_data_sample: EvaluationSample,
-    ):
+    ) -> NumericalScore:
         """
         Returns a tool correctness score given the agent trace and the evaluation data sample.
 
