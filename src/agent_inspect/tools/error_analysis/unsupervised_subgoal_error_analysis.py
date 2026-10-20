@@ -178,8 +178,7 @@ class UnsupervisedSubgoalErrorAnalysis(SubgoalErrorAnalysis):
         response_dict = await self._request_and_parse_json_with_retry(self.llm_client, payload)
         if "most_probable_error_type" in response_dict:
             return response_dict["most_probable_error_type"].strip()
-        else:
-            raise ToolError(
-                internal_code=ErrorCode.UNSUCCESSFUL_MAJORITY_VOTING.value,
-                message=f"LLM majority voting request failed as no most_probable_error_type found in response: {response_dict}",
-            )
+        raise ToolError(
+            internal_code=ErrorCode.UNSUCCESSFUL_MAJORITY_VOTING.value,
+            message=f"LLM majority voting request failed as no most_probable_error_type found in response: {response_dict}",
+        )

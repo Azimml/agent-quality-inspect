@@ -127,4 +127,3 @@ class ToolCallErrorAnalysis(
         :param agent_run_id: Optional agent run ID.
         :return: Tuple of (:obj:`~agent_inspect.models.tools.analysis_models.AnalyzedToolValidation`, cluster_label) where cluster_label is the error category string.
         """
-        pass

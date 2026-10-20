@@ -386,7 +386,7 @@ def test_validate_tool_partial_completion_no_judge_explanation_tool_sample_1_jud
                     error_message="",
                 ),
             ]
-        elif len(prompts) == 3 and not toggle:
+        if len(prompts) == 3 and not toggle:
             return [
                 LLMResponse(
                     status=STATUS_200,
@@ -404,8 +404,7 @@ def test_validate_tool_partial_completion_no_judge_explanation_tool_sample_1_jud
                     error_message="",
                 ),
             ]
-        else:
-            raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 
@@ -491,7 +490,7 @@ def test_validate_tool_partial_completion_no_judge_explanation_tool_sample_1_mix
                     error_message="",
                 ),
             ]
-        elif len(prompts) == 3 and not toggle:
+        if len(prompts) == 3 and not toggle:
             return [
                 LLMResponse(
                     status=STATUS_200,
@@ -509,8 +508,7 @@ def test_validate_tool_partial_completion_no_judge_explanation_tool_sample_1_mix
                     error_message="",
                 ),
             ]
-        else:
-            raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 
@@ -566,8 +564,7 @@ def test_validate_tool_full_completion_no_judge_explanation_tool_sample_1_mixed_
                     error_message="",
                 ),
             ]
-        else:
-            raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 
@@ -627,8 +624,7 @@ def test_validate_tool_partial_completion_no_judge_explanation_tool_sample_1_mix
                     error_message="",
                 ),
             ]
-        else:
-            raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 
@@ -691,8 +687,7 @@ def test_validate_tool_partial_completion_no_judge_explanation_tool_sample_1_mix
                     error_message="",
                 ),
             ]
-        else:
-            raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 
@@ -755,8 +750,7 @@ def test_validate_tool_full_completion_no_judge_explanation_tool_sample_1_mixed_
                     error_message="",
                 ),
             ]
-        else:
-            raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 
@@ -918,8 +912,7 @@ def test_validate_tool_partial_completion_no_judge_explanation_tool_sample_6_tra
                     error_message="",
                 ),
             ]
-        else:
-            raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 
@@ -978,7 +971,7 @@ def test_validate_tool_partial_completion_with_judge_explanation_tool_sample_1_m
                     error_message="",
                 ),
             ]
-        elif len(prompts) == 3 and not toggle:
+        if len(prompts) == 3 and not toggle:
             return [
                 LLMResponse(
                     status=STATUS_200,
@@ -996,8 +989,7 @@ def test_validate_tool_partial_completion_with_judge_explanation_tool_sample_1_m
                     error_message="",
                 ),
             ]
-        else:
-            raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 

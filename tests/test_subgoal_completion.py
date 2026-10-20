@@ -399,8 +399,7 @@ def test_validate_subgoal_completion_completed_no_judge_explanation_no_optimizat
                     error_message="",
                 ),
             ]
-        else:
-            raise AssertionError(f"Expected 5 prompts for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 5 prompts for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 
@@ -440,7 +439,7 @@ def test_validate_subgoal_completion_completed_no_judge_explanation_no_optimizat
                 LLMResponse(status=STATUS_200, completion="", error_message=""),
                 LLMResponse(status=STATUS_200, completion="", error_message=""),
             ]
-        elif len(prompts) == 3:
+        if len(prompts) == 3:
             return [
                 LLMResponse(
                     status=STATUS_200,
@@ -454,7 +453,7 @@ def test_validate_subgoal_completion_completed_no_judge_explanation_no_optimizat
                 ),
                 LLMResponse(status=STATUS_200, completion="", error_message=""),
             ]
-        elif len(prompts) == 1:
+        if len(prompts) == 1:
             return [
                 LLMResponse(
                     status=STATUS_200,
@@ -462,10 +461,7 @@ def test_validate_subgoal_completion_completed_no_judge_explanation_no_optimizat
                     error_message="",
                 ),
             ]
-        else:
-            raise AssertionError(
-                f"Expected 5, 3 or 1 prompt(s) for judge trials. Got {len(prompts)}"
-            )
+        raise AssertionError(f"Expected 5, 3 or 1 prompt(s) for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 
@@ -505,14 +501,13 @@ def test_validate_subgoal_completion_completed_no_judge_explanation_no_optimizat
                 LLMResponse(status=STATUS_200, completion="", error_message=""),
                 LLMResponse(status=STATUS_200, completion="", error_message=""),
             ]
-        elif len(prompts) == 3:
+        if len(prompts) == 3:
             return [
                 LLMResponse(status=STATUS_200, completion="", error_message=""),
                 LLMResponse(status=STATUS_200, completion="", error_message=""),
                 LLMResponse(status=STATUS_200, completion="", error_message=""),
             ]
-        else:
-            raise AssertionError(f"Expected 5 or 3 prompt(s) for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 5 or 3 prompt(s) for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 
@@ -550,8 +545,7 @@ def test_validate_subgoal_completion_completed_no_judge_explanation_optimized(
                     error_message="",
                 ),
             ]
-        else:
-            raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 
@@ -605,8 +599,7 @@ def test_validate_subgoal_completion_incomplete_no_judge_explanation_no_optimiza
                     error_message="",
                 ),
             ]
-        else:
-            raise AssertionError(f"Expected 5 prompts for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 5 prompts for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 
@@ -649,8 +642,7 @@ def test_validate_subgoal_completion_incomplete_no_judge_explanation_optimised(
                     error_message="",
                 ),
             ]
-        else:
-            raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 
@@ -694,7 +686,7 @@ def test_validate_subgoal_completion_completed_no_judge_explanation_3_1_1_calls(
                     error_message="",
                 ),
             ]
-        elif len(prompts) == 1:
+        if len(prompts) == 1:
             nonlocal toggle
             if toggle:
                 toggle = False
@@ -705,16 +697,14 @@ def test_validate_subgoal_completion_completed_no_judge_explanation_3_1_1_calls(
                         error_message="",
                     )
                 ]
-            else:
-                return [
-                    LLMResponse(
-                        status=STATUS_200,
-                        completion="This is a just dummy judge explanation.\n\nGRADE: C",
-                        error_message="",
-                    )
-                ]
-        else:
-            raise AssertionError(f"Expected 3 or 1 prompt(s) for judge trials. Got {len(prompts)}")
+            return [
+                LLMResponse(
+                    status=STATUS_200,
+                    completion="This is a just dummy judge explanation.\n\nGRADE: C",
+                    error_message="",
+                )
+            ]
+        raise AssertionError(f"Expected 3 or 1 prompt(s) for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 
@@ -768,8 +758,7 @@ def test_validate_subgoal_completion_completed_no_judge_explanation_3_1_1_calls_
                     error_message="",
                 ),
             ]
-        else:
-            raise AssertionError(f"Expected 5 prompt(s) for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 5 prompt(s) for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 
@@ -818,7 +807,7 @@ def test_validate_subgoal_completion_incomplete_no_judge_explanation_4_2(
                     error_message="",
                 ),
             ]
-        elif len(prompts) == 2:
+        if len(prompts) == 2:
             return [
                 LLMResponse(
                     status=STATUS_200,
@@ -831,8 +820,7 @@ def test_validate_subgoal_completion_incomplete_no_judge_explanation_4_2(
                     error_message="",
                 ),
             ]
-        else:
-            raise AssertionError(f"Expected 4 or 2 prompts for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 4 or 2 prompts for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 
@@ -866,8 +854,7 @@ def test_validate_subgoal_completion_incomplete_no_judge_explanation_1_trial(
                     error_message="",
                 )
             ]
-        else:
-            raise AssertionError(f"Expected 1 prompt for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 1 prompt for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
     validator = SubGoalCompletionValidator(llm_client=mock_llm_client, config={NUM_JUDGE_TRIALS: 1})
@@ -892,8 +879,7 @@ def test_test_validate_subgoal_completion_incomplete_no_judge_explanation_1_tria
     async def mock_make_llm_requests_fn(prompts):
         if len(prompts) == 1:
             return [LLMResponse(status="", completion="", error_message="Some LLM error occurred.")]
-        else:
-            raise AssertionError(f"Expected 1 prompt for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 1 prompt for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
     validator = SubGoalCompletionValidator(
@@ -938,7 +924,7 @@ def test_validate_subgoal_completion_completed_no_judge_explanation_7_trial_erro
                     error_message="",
                 ),
             ]
-        elif len(prompts) == 3:
+        if len(prompts) == 3:
             return [
                 LLMResponse(
                     status=STATUS_429,
@@ -956,8 +942,7 @@ def test_validate_subgoal_completion_completed_no_judge_explanation_7_trial_erro
                     error_message="",
                 ),
             ]
-        else:
-            raise AssertionError(f"Expected 4 or 3 prompts for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 4 or 3 prompts for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 
@@ -1003,8 +988,7 @@ def test_validate_subgoal_completion_error_early_terminate(
                     error_message="Some LLM error occurred.",
                 ),
             ]
-        else:
-            raise AssertionError(f"Expected 4 prompts for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 4 prompts for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 
@@ -1045,8 +1029,7 @@ def test_validate_subgoal_completion_completed_with_judge_explanation(
                     error_message="",
                 ),
             ]
-        else:
-            raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 
@@ -1094,8 +1077,7 @@ def test_validate_subgoal_completion_completed_with_prompt_sent_to_llmj_optimise
                     error_message="",
                 ),
             ]
-        else:
-            raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 
@@ -1182,8 +1164,7 @@ def test_validate_subgoal_completion_dynamic_complete_no_judge_explanation_optim
                     error_message="",
                 ),
             ]
-        else:
-            raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 
@@ -1240,8 +1221,7 @@ def test_validate_subgoal_completion_dynamic_complete_no_judge_explanation_no_op
                     error_message="",
                 ),
             ]
-        else:
-            raise AssertionError(f"Expected 5 prompts for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 5 prompts for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 
@@ -1288,8 +1268,7 @@ def test_validate_subgoal_completion_dynamic_incomplete_no_judge_explanation_opt
                     error_message="",
                 ),
             ]
-        else:
-            raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 
@@ -1345,8 +1324,7 @@ def test_validate_subgoal_completion_dynamic_incomplete_no_judge_explanation_no_
                     error_message="",
                 ),
             ]
-        else:
-            raise AssertionError(f"Expected 5 prompts for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 5 prompts for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 
@@ -1392,8 +1370,7 @@ def test_validate_subgoal_completion_dynamic_completed_with_judge_explanation(
                     error_message="",
                 ),
             ]
-        else:
-            raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 
@@ -1444,8 +1421,7 @@ def test_validate_subgoal_completion_dynamic_completed_with_prompt_sent_to_llmj(
                     error_message="",
                 ),
             ]
-        else:
-            raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 
@@ -1608,8 +1584,7 @@ def test_validate_dynamic_complete_no_judge_explanation_optimised(
                     error_message="",
                 ),
             ]
-        else:
-            raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 
@@ -1655,8 +1630,7 @@ def test_validate_dynamic_complete_no_judge_explanation_optimised_with_user_inst
                     error_message="",
                 ),
             ]
-        else:
-            raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 
@@ -1712,8 +1686,7 @@ def test_validate_subgoal_completion_dynamic_without_instruction_complete_no_jud
                     error_message="",
                 ),
             ]
-        else:
-            raise AssertionError(f"Expected 5 prompts for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 5 prompts for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 
@@ -1759,8 +1732,7 @@ def test_validate_subgoal_completion_dynamic_without_instruction_incomplete_no_j
                     error_message="",
                 ),
             ]
-        else:
-            raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 
@@ -1815,8 +1787,7 @@ def test_validate_subgoal_completion_dynamic_without_instruction_incomplete_no_j
                     error_message="",
                 ),
             ]
-        else:
-            raise AssertionError(f"Expected 5 prompts for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 5 prompts for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 
@@ -1861,8 +1832,7 @@ def test_validate_subgoal_completion_dynamic_without_instruction_completed_with_
                     error_message="",
                 ),
             ]
-        else:
-            raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 
@@ -1912,8 +1882,7 @@ def test_validate_subgoal_completion_dynamic_without_instruction_completed_with_
                     error_message="",
                 ),
             ]
-        else:
-            raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
+        raise AssertionError(f"Expected 3 prompts for judge trials. Got {len(prompts)}")
 
     mock_llm_client.make_llm_requests.side_effect = mock_make_llm_requests_fn
 

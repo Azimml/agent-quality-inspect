@@ -237,19 +237,18 @@ class ToolCallCompletionValidator(Validator):
                     )
                     tool_call_validation_results[tool_call_name] = True
                     break
-                else:
-                    tool_call_validation_results[tool_call_name] = False
-                    self._aggregate_failure(
-                        expected_tool_call=expected_tool_call,
-                        parameter_validation_results=parameter_validation_results,
-                        output_explanation=output_explanation,
-                        explanations=explanations,
-                    )
-                    res_tool_call_validation = ToolCallValidationResult(
-                        is_completed=False,
-                        expected_tool_call=expected_tool_call,
-                        explanations=explanations,
-                    )
+                tool_call_validation_results[tool_call_name] = False
+                self._aggregate_failure(
+                    expected_tool_call=expected_tool_call,
+                    parameter_validation_results=parameter_validation_results,
+                    output_explanation=output_explanation,
+                    explanations=explanations,
+                )
+                res_tool_call_validation = ToolCallValidationResult(
+                    is_completed=False,
+                    expected_tool_call=expected_tool_call,
+                    explanations=explanations,
+                )
 
         # no matching tool name found for this expected tool call in the current turn, return failed validation result with explanation
         if res_tool_call_validation is None:
@@ -331,18 +330,17 @@ class ToolCallCompletionValidator(Validator):
                 "expected_check": param.check,
                 "explanation": explanation_list,
             }
-        else:
-            # when param.check is None, will ONLY trigger the exact match validation
-            is_correct, explanation_str = self.validate_tool_call_parameter_by_exact_match(
-                expected_tool_param=param,
-                actual_tool_call_step=agent_single_tool_step,
-            )
-            return {
-                "is_completed": is_correct,
-                "method": "exact_match",
-                "expected_value": param.value,
-                "explanation": explanation_str,
-            }
+        # when param.check is None, will ONLY trigger the exact match validation
+        is_correct, explanation_str = self.validate_tool_call_parameter_by_exact_match(
+            expected_tool_param=param,
+            actual_tool_call_step=agent_single_tool_step,
+        )
+        return {
+            "is_completed": is_correct,
+            "method": "exact_match",
+            "expected_value": param.value,
+            "explanation": explanation_str,
+        }
 
     async def _validate_output(
         self,
@@ -533,14 +531,13 @@ class ToolCallCompletionValidator(Validator):
                         return True, ARGUMENT_PASSED_EXACT_MATCH_EXPLANATION.format(
                             param_name=param_name
                         )
-                    else:
-                        return False, ARGUMENT_FAILED_EXACT_MATCH_EXPLANATION.format(
-                            param_name=param_name,
-                            expected_value=expected_tool_param.value,
-                            expected_type=type(expected_tool_param.value),
-                            actual_value=input_arg.value,
-                            actual_type=type(input_arg.value),
-                        )
+                    return False, ARGUMENT_FAILED_EXACT_MATCH_EXPLANATION.format(
+                        param_name=param_name,
+                        expected_value=expected_tool_param.value,
+                        expected_type=type(expected_tool_param.value),
+                        actual_value=input_arg.value,
+                        actual_type=type(input_arg.value),
+                    )
         return False, ARGUMENT_NOT_FOUND_EXPLANATION.format(
             param_name=param_name,
             expected_value=expected_tool_param.value,
@@ -554,13 +551,12 @@ class ToolCallCompletionValidator(Validator):
         actual_output = actual_tool_call_step.tool_output
         if actual_output == expected_output_value:
             return True, OUTPUT_PASSED_EXACT_MATCH_EXPLANATION
-        else:
-            return False, OUTPUT_FAILED_EXACT_MATCH_EXPLANATION.format(
-                expected_output=expected_output_value,
-                expected_type=type(expected_output_value),
-                actual_output=actual_output,
-                actual_type=type(actual_output),
-            )
+        return False, OUTPUT_FAILED_EXACT_MATCH_EXPLANATION.format(
+            expected_output=expected_output_value,
+            expected_type=type(expected_output_value),
+            actual_output=actual_output,
+            actual_type=type(actual_output),
+        )
 
     @staticmethod
     async def validate_tool_call_output_by_llmj(

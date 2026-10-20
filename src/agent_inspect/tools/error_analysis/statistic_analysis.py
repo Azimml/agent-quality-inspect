@@ -68,9 +68,8 @@ class StatisticAnalysis:
                     component_code=ToolComponent.TOOL_ERROR_CODE.value,
                     message="Subgoal must have at least 1 judge scores to compute probability.",
                 )
-            else:
-                probability = sum(subgoal_scores) / len(subgoal_scores)
-                probabilities.append(probability)
+            probability = sum(subgoal_scores) / len(subgoal_scores)
+            probabilities.append(probability)
         return probabilities
 
     @staticmethod

@@ -30,4 +30,3 @@ class BaseAdapter(ABC):
         :param conversation_data: Conversation data in external format (format varies by adapter).
         :return: Converted agent trace.
         """
-        pass

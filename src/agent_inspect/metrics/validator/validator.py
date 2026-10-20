@@ -73,15 +73,14 @@ class Validator:
                 regex_pattern,
                 grade_choices,
             )
-        else:
-            return await Validator.get_majority_voted_score_from_judge_responses_unoptimised(
-                self.llm_client,
-                prompt,
-                num_judge_trials,
-                max_retry_judge_trials,
-                regex_pattern,
-                grade_choices,
-            )
+        return await Validator.get_majority_voted_score_from_judge_responses_unoptimised(
+            self.llm_client,
+            prompt,
+            num_judge_trials,
+            max_retry_judge_trials,
+            regex_pattern,
+            grade_choices,
+        )
 
     @staticmethod
     async def get_majority_voted_score_from_judge_responses_unoptimised(
@@ -137,8 +136,7 @@ class Validator:
             )
         if completed_trial_count > incompleted_trial_cnt:
             return 1, judge_explanations
-        else:
-            return 0, judge_explanations
+        return 0, judge_explanations
 
     @staticmethod
     async def get_majority_voted_score_from_judge_responses_optimised(

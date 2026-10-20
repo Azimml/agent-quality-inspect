@@ -120,30 +120,27 @@ class UserProxyAgent(LLMProxyAgent):
                     check_delegate=self.task_delegated_terminating_condition.check,
                     check_blocked=self.task_blocked_terminating_condition.check,
                 )
-            else:
-                return EXPERT_PERSONA_TEMPLATE.format(
-                    task_summary=self.task_summary,
-                    agent_desc=self.agent_description,
-                    check=self.terminating_condition.check,
-                )
-        else:
-            if self.is_multi_terminating_conditions:
-                return NONEXPERT_PERSONA_MULTI_TERMINATION_TEMPLATE.format(
-                    task_summary=self.task_summary,
-                    agent_desc=self.agent_description,
-                    stop_sequence_done=self.task_completed_terminating_condition.stop_sequence,
-                    stop_sequence_delegate=self.task_delegated_terminating_condition.stop_sequence,
-                    stop_sequence_blocked=self.task_blocked_terminating_condition.stop_sequence,
-                    check_done=self.task_completed_terminating_condition.check,
-                    check_delegate=self.task_delegated_terminating_condition.check,
-                    check_blocked=self.task_blocked_terminating_condition.check,
-                )
-            else:
-                return NONEXPERT_PERSONA_TEMPLATE.format(
-                    task_summary=self.task_summary,
-                    agent_desc=self.agent_description,
-                    check=self.terminating_condition.check,
-                )
+            return EXPERT_PERSONA_TEMPLATE.format(
+                task_summary=self.task_summary,
+                agent_desc=self.agent_description,
+                check=self.terminating_condition.check,
+            )
+        if self.is_multi_terminating_conditions:
+            return NONEXPERT_PERSONA_MULTI_TERMINATION_TEMPLATE.format(
+                task_summary=self.task_summary,
+                agent_desc=self.agent_description,
+                stop_sequence_done=self.task_completed_terminating_condition.stop_sequence,
+                stop_sequence_delegate=self.task_delegated_terminating_condition.stop_sequence,
+                stop_sequence_blocked=self.task_blocked_terminating_condition.stop_sequence,
+                check_done=self.task_completed_terminating_condition.check,
+                check_delegate=self.task_delegated_terminating_condition.check,
+                check_blocked=self.task_blocked_terminating_condition.check,
+            )
+        return NONEXPERT_PERSONA_TEMPLATE.format(
+            task_summary=self.task_summary,
+            agent_desc=self.agent_description,
+            check=self.terminating_condition.check,
+        )
 
     @staticmethod
     def _get_chat_history_str_from_chat_history(chat_history: ChatHistory) -> str:
@@ -190,26 +187,23 @@ class UserProxyAgent(LLMProxyAgent):
                 stop_sequence_delegate=delegated_condition.stop_sequence,
                 stop_sequence_blocked=blocked_condition.stop_sequence,
             )
-        else:
-            return USER_PROXY_REFLECTION_GEN_TEMPLATE.format(
-                chat_history_str=chat_history_str,
-                stop_sequence=self.terminating_condition.stop_sequence,
-            )
+        return USER_PROXY_REFLECTION_GEN_TEMPLATE.format(
+            chat_history_str=chat_history_str,
+            stop_sequence=self.terminating_condition.stop_sequence,
+        )
 
     def _contains_stop_sequence(self, user_proxy_message_str: str) -> str | None:
         if self.is_multi_terminating_conditions:
             if self.task_completed_terminating_condition.stop_sequence in user_proxy_message_str:
                 return self.task_completed_terminating_condition.stop_sequence
-            elif self.task_delegated_terminating_condition.stop_sequence in user_proxy_message_str:
+            if self.task_delegated_terminating_condition.stop_sequence in user_proxy_message_str:
                 return self.task_delegated_terminating_condition.stop_sequence
-            elif self.task_blocked_terminating_condition.stop_sequence in user_proxy_message_str:
+            if self.task_blocked_terminating_condition.stop_sequence in user_proxy_message_str:
                 return self.task_blocked_terminating_condition.stop_sequence
-            else:
-                return None
-        else:
-            if self.terminating_condition.stop_sequence in user_proxy_message_str:
-                return self.terminating_condition.stop_sequence
             return None
+        if self.terminating_condition.stop_sequence in user_proxy_message_str:
+            return self.terminating_condition.stop_sequence
+        return None
 
     def _get_user_proxy_reply_generation_prompt(
         self, chat_history_str: str, user_message_reflection: str
@@ -222,33 +216,30 @@ class UserProxyAgent(LLMProxyAgent):
                 stop_sequence_delegate=self.task_delegated_terminating_condition.stop_sequence,
                 stop_sequence_blocked=self.task_blocked_terminating_condition.stop_sequence,
             )
-        else:
-            return USER_PROXY_REPLY_GEN_TEMPLATE.format(
-                chat_history_str=chat_history_str,
-                user_message_reflection=user_message_reflection,
-                stop_sequence=self.terminating_condition.stop_sequence,
-            )
+        return USER_PROXY_REPLY_GEN_TEMPLATE.format(
+            chat_history_str=chat_history_str,
+            user_message_reflection=user_message_reflection,
+            stop_sequence=self.terminating_condition.stop_sequence,
+        )
 
     def _get_check_from_stop_sequence(self, stop_sequence: str) -> str:
         if self.is_multi_terminating_conditions:
             if stop_sequence == self.task_completed_terminating_condition.stop_sequence:
                 return self.task_completed_terminating_condition.check
-            elif stop_sequence == self.task_delegated_terminating_condition.stop_sequence:
+            if stop_sequence == self.task_delegated_terminating_condition.stop_sequence:
                 return self.task_delegated_terminating_condition.check
-            elif stop_sequence == self.task_blocked_terminating_condition.stop_sequence:
+            if stop_sequence == self.task_blocked_terminating_condition.stop_sequence:
                 return self.task_blocked_terminating_condition.check
-            else:
-                raise UserProxyError(
-                    internal_code=ErrorCode.INVALID_USER_PROXY_RESPONSE.value,
-                    message=f"Received stop sequence '{stop_sequence}' does not match any of the defined terminating conditions' stop sequences.",
-                )
-        else:
-            if stop_sequence == self.terminating_condition.stop_sequence:
-                return self.terminating_condition.check
             raise UserProxyError(
                 internal_code=ErrorCode.INVALID_USER_PROXY_RESPONSE.value,
-                message=f"Received stop sequence '{stop_sequence}' does not match the defined terminating condition's stop sequence.",
+                message=f"Received stop sequence '{stop_sequence}' does not match any of the defined terminating conditions' stop sequences.",
             )
+        if stop_sequence == self.terminating_condition.stop_sequence:
+            return self.terminating_condition.check
+        raise UserProxyError(
+            internal_code=ErrorCode.INVALID_USER_PROXY_RESPONSE.value,
+            message=f"Received stop sequence '{stop_sequence}' does not match the defined terminating condition's stop sequence.",
+        )
 
     async def generate_message_from_chat_history(
         self, chat_history: ChatHistory

@@ -163,11 +163,10 @@ class SubgoalErrorAnalysis(
         response_dict = await self._request_and_parse_json_with_retry(self.llm_client, payload)
         if "error_type" in response_dict:
             return response_dict["error_type"].strip()
-        else:
-            raise ToolError(
-                internal_code=ErrorCode.UNSUCCESSFUL_LLM_SUMMARIZATION.value,
-                message=f"LLM error summarization request failed as no error_type found in response: {response_dict}",
-            )
+        raise ToolError(
+            internal_code=ErrorCode.UNSUCCESSFUL_LLM_SUMMARIZATION.value,
+            message=f"LLM error summarization request failed as no error_type found in response: {response_dict}",
+        )
 
     def _split_analysed_subgoal_validations_by_completeness(
         self, analysed_subgoal_validation_list: list[list[AnalyzedSubgoalValidation]]
@@ -298,7 +297,6 @@ class SubgoalErrorAnalysis(
         :param subgoal_validation: a :obj:`~agent_inspect.models.metrics.validation_result.SubGoalValidationResult` object to analyze.
         :return: A concise base error description, or None if the subgoal was completed.
         """
-        pass
 
     @abstractmethod
     async def _cluster_errors(
@@ -309,4 +307,3 @@ class SubgoalErrorAnalysis(
         :param analyzed_subgoal_validations: a :obj:`~typing.List` of :obj:`~agent_inspect.models.tools.analysis_models.AnalyzedSubgoalValidation` objects with base errors.
         :return: Dictionary containing clustering results with cluster labels and error_ids.
         """
-        pass

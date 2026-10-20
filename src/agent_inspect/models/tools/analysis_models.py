@@ -178,5 +178,3 @@ class ToolCallErrorAnalysisResult(ErrorAnalysisResult[AnalyzedToolValidation]):
     This result only contains failed validations clustered by error type.
     Passed validations are not included as they don't require error analysis.
     """
-
-    pass

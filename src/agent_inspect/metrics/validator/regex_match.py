@@ -9,5 +9,4 @@ def regex_match(candidate: str, pattern: str, config: dict[str, Any] | None = No
     flags = 0
     if mode == "full":
         return re.fullmatch(pattern, candidate, flags) is not None
-    else:
-        return re.search(pattern, candidate, flags) is not None
+    return re.search(pattern, candidate, flags) is not None
