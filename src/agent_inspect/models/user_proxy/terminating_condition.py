@@ -13,9 +13,7 @@ DEFAULT_BLOCKED_CHECK = "The task must be terminated when the AI agent is unable
 
 @dataclass
 class TerminatingCondition:
-    """
-    Represents a condition used to terminate user-agent conversation early.
-    """
+    """Represents a condition used to terminate user-agent conversation early."""
 
     check: str = DEFAULT_CHECK
     """
@@ -29,9 +27,7 @@ class TerminatingCondition:
 
 @dataclass
 class TaskCompletedTerminatingCondition(TerminatingCondition):
-    """
-    Represents a terminating condition indicating that the task is completed.
-    """
+    """Represents a terminating condition indicating that the task is completed."""
 
     check: str = DEFAULT_DONE_CHECK
     """
@@ -45,9 +41,7 @@ class TaskCompletedTerminatingCondition(TerminatingCondition):
 
 @dataclass
 class TaskDelegatedTerminatingCondition(TerminatingCondition):
-    """
-    Represents a terminating condition indicating that the task is delegated to another party.
-    """
+    """Represents a terminating condition indicating that the task is delegated to another party."""
 
     check: str = DEFAULT_DELEGATED_CHECK
     """
@@ -61,9 +55,7 @@ class TaskDelegatedTerminatingCondition(TerminatingCondition):
 
 @dataclass
 class TaskBlockedTerminatingCondition(TerminatingCondition):
-    """
-    Represents a terminating condition indicating that the task is blocked due to some issues.
-    """
+    """Represents a terminating condition indicating that the task is blocked due to some issues."""
 
     check: str = DEFAULT_BLOCKED_CHECK
     """

@@ -6,9 +6,7 @@ from agent_inspect.models.metrics.agent_trace import AgentDialogueTrace
 
 
 class BaseAdapter(ABC):
-    """
-    Abstract base class for converting external agent trace formats to AgentDialogueTrace format.
-    """
+    """Abstract base class for converting external agent trace formats to AgentDialogueTrace format."""
 
     @staticmethod
     def load_json(file_path: str) -> dict[str, Any]:

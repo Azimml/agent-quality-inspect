@@ -3,9 +3,7 @@ from dataclasses import dataclass
 
 @dataclass
 class LLMResponse:
-    """
-    Represents a response from a LLM.
-    """
+    """Represents a response from a LLM."""
 
     status: int
     """

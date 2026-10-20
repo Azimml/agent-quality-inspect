@@ -4,9 +4,7 @@ from agent_inspect.models.metrics.agent_data_sample import ExpectedToolCall
 
 
 class ExpectedToolCallValidator:
-    """
-    A utility class for validating expected tool call in eval data samples.
-    """
+    """A utility class for validating expected tool call in eval data samples."""
 
     @staticmethod
     def validate_expected_tool_call(expected_tool_call: ExpectedToolCall) -> None:

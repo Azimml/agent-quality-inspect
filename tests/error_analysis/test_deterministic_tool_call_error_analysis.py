@@ -1,6 +1,4 @@
-"""
-Unit tests for the DeterministicToolCallErrorAnalysis class.
-"""
+"""Unit tests for the DeterministicToolCallErrorAnalysis class."""
 
 import pytest
 

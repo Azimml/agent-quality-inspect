@@ -6,9 +6,7 @@ from agent_inspect.models.metrics.agent_data_sample import ToolInputParameter
 
 @dataclass
 class AgentResponse:
-    """
-    Represents an agent response produced by the agent in one turn.
-    """
+    """Represents an agent response produced by the agent in one turn."""
 
     response: str | dict
     """
@@ -22,9 +20,7 @@ class AgentResponse:
 
 @dataclass
 class Step:
-    """
-    Represents a necessary step that the agent takes within a turn to produce the final response(s) back to the user/ user proxy.
-    """
+    """Represents a necessary step that the agent takes within a turn to produce the final response(s) back to the user/ user proxy."""
 
     id: str
     """
@@ -66,9 +62,7 @@ class Step:
 
 @dataclass
 class TurnTrace:
-    """
-    Represents a turn: one back and forth conversation between the agent and the user/user proxy by encapsulating the agent trace (logs) produced during a turn.
-    """
+    """Represents a turn: one back and forth conversation between the agent and the user/user proxy by encapsulating the agent trace (logs) produced during a turn."""
 
     id: str
     """
@@ -98,9 +92,7 @@ class TurnTrace:
 
 @dataclass
 class AgentDialogueTrace:
-    """
-    Represents an agent trace (logs) produced by an agent given an evaluation data sample during an evaluation run.
-    """
+    """Represents an agent trace (logs) produced by an agent given an evaluation data sample during an evaluation run."""
 
     turns: list[TurnTrace] | None = None
     """

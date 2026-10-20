@@ -5,9 +5,7 @@ from agent_inspect.models.llm_response import LLMResponse
 
 
 class LLMClient(ABC):
-    """
-    This is a base abstract class that should be extended for actual implementations to connect to llm-as-a-judge model.
-    """
+    """This is a base abstract class that should be extended for actual implementations to connect to llm-as-a-judge model."""
 
     @abstractmethod
     async def make_llm_request(self, prompt: str) -> LLMResponse:

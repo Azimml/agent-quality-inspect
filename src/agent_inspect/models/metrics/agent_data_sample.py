@@ -23,9 +23,7 @@ class SubGoal:
 
 @dataclass
 class ToolInputParameter:
-    """
-    Represents a parameter which the agent should invoke with the tool.
-    """
+    """Represents a parameter which the agent should invoke with the tool."""
 
     name: str
     """
@@ -43,9 +41,7 @@ class ToolInputParameter:
 
 @dataclass
 class ToolOutput:
-    """
-    Represents the expected output from the tool after the agent invokes it.
-    """
+    """Represents the expected output from the tool after the agent invokes it."""
 
     value: Any | None = None
     """
@@ -59,9 +55,7 @@ class ToolOutput:
 
 @dataclass
 class ExpectedToolCall:
-    """
-    Represents the correct tool invocation an agent is expected to make for a particular task. It serves as the ground-truth tool call for the evaluations.
-    """
+    """Represents the correct tool invocation an agent is expected to make for a particular task. It serves as the ground-truth tool call for the evaluations."""
 
     tool: str
     """
@@ -83,9 +77,7 @@ class ExpectedToolCall:
 
 @dataclass
 class Conversation:
-    """
-    Represents one back-and-forth exchange between a user and an agent (one turn), containing an input message and an optional expected response.
-    """
+    """Represents one back-and-forth exchange between a user and an agent (one turn), containing an input message and an optional expected response."""
 
     turn_id: int
     """
@@ -103,9 +95,7 @@ class Conversation:
 
 @dataclass
 class EvaluationSample:
-    """
-    Represents an item in the evaluation dataset.
-    """
+    """Represents an item in the evaluation dataset."""
 
     sub_goals: list[SubGoal]
     """

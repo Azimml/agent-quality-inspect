@@ -3,9 +3,7 @@ from dataclasses import dataclass
 
 @dataclass
 class ResponseFromAgent:
-    """
-    Represents agent response and other related outputs.
-    """
+    """Represents agent response and other related outputs."""
 
     response_str: str
     """
@@ -19,9 +17,7 @@ class ResponseFromAgent:
 
 @dataclass
 class UserProxyMessage:
-    """
-    Represents an utterance from the user proxy.
-    """
+    """Represents an utterance from the user proxy."""
 
     message_str: str
     """
@@ -35,9 +31,7 @@ class UserProxyMessage:
 
 @dataclass
 class ConversationTurn:
-    """
-    Represents a single conversation exchange between user and agent in the current conversational turn.
-    """
+    """Represents a single conversation exchange between user and agent in the current conversational turn."""
 
     id: str
     """
@@ -55,9 +49,7 @@ class ConversationTurn:
 
 @dataclass
 class ChatHistory:
-    """
-    Represents the user-agent conversation history.
-    """
+    """Represents the user-agent conversation history."""
 
     id: str
     """

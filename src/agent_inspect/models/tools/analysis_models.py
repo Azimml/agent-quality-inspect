@@ -60,9 +60,7 @@ class ToolCallErrorAnalysisDataSample(ErrorAnalysisDataSample):
 
 @dataclass
 class StatisticAnalysisResult:
-    """
-    Represents the statistical analysis result for a single data sample.
-    """
+    """Represents the statistical analysis result for a single data sample."""
 
     data_sample_id: int
     """
@@ -118,9 +116,7 @@ class AnalyzedValidation:
 
 @dataclass
 class AnalyzedSubgoalValidation(AnalyzedValidation):
-    """
-    Represents the error analysis result for a single subgoal validation within a data sample.
-    """
+    """Represents the error analysis result for a single subgoal validation within a data sample."""
 
     subgoal_validation: SubGoalValidationResult
     """
@@ -130,9 +126,7 @@ class AnalyzedSubgoalValidation(AnalyzedValidation):
 
 @dataclass
 class AnalyzedToolValidation(AnalyzedValidation):
-    """
-    Represents the error analysis result for a single tool call validation within a data sample.
-    """
+    """Represents the error analysis result for a single tool call validation within a data sample."""
 
     tool_call_validation: ToolCallValidationResult
     """
@@ -162,9 +156,7 @@ class ErrorAnalysisResult(Generic[T]):
 
 @dataclass
 class SubgoalErrorAnalysisResult(ErrorAnalysisResult[AnalyzedSubgoalValidation]):
-    """
-    Represents the overall error analysis result for a set of data samples (subgoal-based).
-    """
+    """Represents the overall error analysis result for a set of data samples (subgoal-based)."""
 
     completed_subgoal_validations: list[AnalyzedSubgoalValidation] = field(default_factory=list)
     """

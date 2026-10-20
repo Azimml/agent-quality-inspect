@@ -4,9 +4,7 @@ from agent_inspect.models.metrics.agent_data_sample import SubGoal
 
 
 class SubGoalValidator:
-    """
-    A utility class for validating subgoals in agent turn traces.
-    """
+    """A utility class for validating subgoals in agent turn traces."""
 
     @staticmethod
     def validate_sub_goal(subgoal: SubGoal) -> None:

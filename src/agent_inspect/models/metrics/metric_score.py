@@ -6,9 +6,7 @@ from agent_inspect.models.metrics.validation_result import ValidationResult
 
 @dataclass
 class NumericalScore:
-    """
-    Represents a numerical score produced by a metric after computation.
-    """
+    """Represents a numerical score produced by a metric after computation."""
 
     score: float
     """
@@ -30,9 +28,7 @@ class NumericalScore:
 
 @dataclass
 class BooleanScore:
-    """
-    Represents a boolean score produced by a metric after computation.
-    """
+    """Represents a boolean score produced by a metric after computation."""
 
     score: bool
     """

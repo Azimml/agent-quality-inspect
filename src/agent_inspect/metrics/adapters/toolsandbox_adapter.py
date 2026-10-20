@@ -12,9 +12,7 @@ from agent_inspect.models.metrics.agent_trace import (
 
 
 class ToolsandboxAdapter(BaseAdapter):
-    """
-    Adapter for converting toolsandbox conversation format to AgentDialogueTrace format.
-    """
+    """Adapter for converting toolsandbox conversation format to AgentDialogueTrace format."""
 
     def convert_to_agent_trace(
         self, conversation_data: list[list[dict[str, Any]]]

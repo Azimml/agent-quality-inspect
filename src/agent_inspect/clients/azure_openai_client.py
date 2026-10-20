@@ -22,9 +22,7 @@ logger = logging.getLogger(__name__)
 
 
 def backoff_handler(details):
-    """
-    Custom handler for backoff events to log messages with extra attributes.
-    """
+    """Custom handler for backoff events to log messages with extra attributes."""
     message = (
         f"Backing off {details['target'].__name__} "
         f"(args={details['args']}, kwargs={details['kwargs']}) "
@@ -37,9 +35,7 @@ def backoff_handler(details):
 
 
 def give_up_handler(details):
-    """
-    Custom handler for when max retries are reached.
-    """
+    """Custom handler for when max retries are reached."""
     message = (
         f"Max retries reached for {details['target'].__name__} "
         f"(args={details['args']}, kwargs={details['kwargs']}, "

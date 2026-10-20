@@ -5,9 +5,7 @@ from agent_inspect.models.metrics.agent_data_sample import ExpectedToolCall, Sub
 
 @dataclass
 class ValidationResult:
-    """
-    Represents a result produced after validation (e.g. subgoal validation, tool call validation).
-    """
+    """Represents a result produced after validation (e.g. subgoal validation, tool call validation)."""
 
     is_completed: bool
     """
@@ -21,9 +19,7 @@ class ValidationResult:
 
 @dataclass
 class SubGoalValidationResult(ValidationResult):
-    """
-    Represents a result produced after validation.
-    """
+    """Represents a result produced after validation."""
 
     sub_goal: SubGoal
     """
@@ -37,9 +33,7 @@ class SubGoalValidationResult(ValidationResult):
 
 @dataclass
 class ToolCallValidationResult(ValidationResult):
-    """
-    Represents a tool correctness result after validation.
-    """
+    """Represents a tool correctness result after validation."""
 
     expected_tool_call: ExpectedToolCall
     """

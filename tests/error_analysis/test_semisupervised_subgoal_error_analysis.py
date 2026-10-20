@@ -1,6 +1,4 @@
-"""
-Unit tests for the SemisupervisedSubgoalErrorAnalysis class.
-"""
+"""Unit tests for the SemisupervisedSubgoalErrorAnalysis class."""
 
 import asyncio
 import json

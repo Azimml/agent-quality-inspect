@@ -1,6 +1,4 @@
-"""
-Unit tests for the SemisupervisedToolCallErrorAnalysis class.
-"""
+"""Unit tests for the SemisupervisedToolCallErrorAnalysis class."""
 
 import json
 from dataclasses import dataclass

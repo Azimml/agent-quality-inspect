@@ -4,9 +4,7 @@ from agent_inspect.models.metrics.agent_trace import TurnTrace
 
 
 class TraceValidator:
-    """
-    A utility class for validating agent turn traces.
-    """
+    """A utility class for validating agent turn traces."""
 
     @staticmethod
     def validate_turn_traces_content(agent_turn_traces: list[TurnTrace]) -> None:

@@ -4,9 +4,7 @@ from typing import Any
 
 @dataclass
 class LLMPayload:
-    """
-    Represents the payload to be sent to a Language Model (LLM) for processing.
-    """
+    """Represents the payload to be sent to a Language Model (LLM) for processing."""
 
     user_prompt: str
     """
