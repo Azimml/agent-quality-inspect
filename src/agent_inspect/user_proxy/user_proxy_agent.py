@@ -58,7 +58,7 @@ class UserProxyAgent(LLMProxyAgent):
         agent_description: str = "",
         initial_message: str = "",
         config: dict[str, Any] | None = None,
-    ):
+    ) -> None:
         super().__init__(llm_client, config)
 
         self.initial_message = initial_message

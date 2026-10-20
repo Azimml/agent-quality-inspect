@@ -35,7 +35,7 @@ class ToolCorrectnessMetric(LLMBasedMetric):
         - **include_judge_explanation**: a :obj:`~typing.bool` flag to indicate whether the output should also return judge explanations. Default to ``False``.
     """
 
-    def __init__(self, llm_client: LLMClient, config: dict[str, Any] | None = None):
+    def __init__(self, llm_client: LLMClient, config: dict[str, Any] | None = None) -> None:
         super().__init__(llm_client, config)
 
     def evaluate(

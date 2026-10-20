@@ -33,7 +33,7 @@ class AUC(LLMBasedMetric):
         - **max_turns**: Evaluate the agent up to max_turns conversation only.  For conversation shorter than ``max_turns``, the final progress score is populated up to ``max_turns``. Default to ``20``.
     """
 
-    def __init__(self, llm_client: LLMClient, config: dict[str, Any] | None = None):
+    def __init__(self, llm_client: LLMClient, config: dict[str, Any] | None = None) -> None:
         super().__init__(llm_client, config)
 
     def evaluate(
@@ -79,8 +79,6 @@ class AUC(LLMBasedMetric):
                 internal_code=ErrorCode.EMPTY_PROGRESS_SCORE.value,
                 message="No progress score produced for AUC calculation.",
             )
-        n = len(progress_scores)
-        x = [i / (n - 1) if n > 1 else 0 for i in range(n)]
         progress_rates = [progress_score.score for progress_score in progress_scores]
         progress_explanations = [progress_score.explanations for progress_score in progress_scores]
         sub_scores = {}
@@ -88,7 +86,7 @@ class AUC(LLMBasedMetric):
             sub_scores[f"Turn_{idx + 1}_progress_score"] = progress
 
         return NumericalScore(
-            score=round(auc(x, progress_rates), 4),
+            score=AUC._compute_auc(progress_rates),
             explanations=progress_explanations,
             sub_scores=sub_scores,
         )
@@ -135,14 +133,23 @@ class AUC(LLMBasedMetric):
                 internal_code=ErrorCode.EMPTY_PROGRESS_SCORE.value,
                 message="No progress score provided for AUC calculation.",
             )
-        scores = [ps.score for ps in progress_scores]
+        return NumericalScore(score=AUC._compute_auc([ps.score for ps in progress_scores]))
+
+    @staticmethod
+    def _compute_auc(scores: list[float]) -> float:
+        """
+        Computes the AUC of per-turn progress scores on a normalized [0, 1] turn axis, rounded to 4 decimals.
+
+        Shared by :meth:`evaluate` and :meth:`get_auc_score_from_progress_scores` so both use the same
+        turn normalization and raise the same :obj:`~agent_inspect.exception.EvaluationError` when the
+        underlying AUC calculation fails.
+        """
         n = len(scores)
         x = [i / (n - 1) if n > 1 else 0 for i in range(n)]
         try:
-            auc_score = round(auc(x, scores), 4)
+            return round(auc(x, scores), 4)
         except ValueError as e:
             raise EvaluationError(
                 internal_code=ErrorCode.AUC_CALCULATION_ERROR.value,
                 message=f"Error calculating AUC: {e!s}",
             ) from e
-        return NumericalScore(score=auc_score)

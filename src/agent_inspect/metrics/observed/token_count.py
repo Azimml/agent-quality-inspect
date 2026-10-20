@@ -22,7 +22,7 @@ class TokenConsumptionMetric(ObservedMetric):
     :param config: Configuration for token consumption metric initialization.
     """
 
-    def __init__(self, config: dict[str, Any] | None = None):
+    def __init__(self, config: dict[str, Any] | None = None) -> None:
         super().__init__(config)
 
     @abstractmethod
@@ -71,7 +71,7 @@ class InputTotalTokenCount(TokenConsumptionMetric):
     :param config: Configuration for input token consumption metric initialization.
     """
 
-    def __init__(self, config: dict[str, Any] | None = None):
+    def __init__(self, config: dict[str, Any] | None = None) -> None:
         super().__init__(config)
 
     def evaluate(
@@ -94,7 +94,7 @@ class OutputTotalTokenCount(TokenConsumptionMetric):
     :param config: Configuration for output token consumption metric initialization.
     """
 
-    def __init__(self, config: dict[str, Any] | None = None):
+    def __init__(self, config: dict[str, Any] | None = None) -> None:
         super().__init__(config)
 
     def evaluate(
@@ -117,7 +117,7 @@ class ReasoningTotalTokenCount(TokenConsumptionMetric):
     :param config: Configuration for reasoning token consumption metric initialization.
     """
 
-    def __init__(self, config: dict[str, Any] | None = None):
+    def __init__(self, config: dict[str, Any] | None = None) -> None:
         super().__init__(config)
 
     def evaluate(
@@ -142,7 +142,7 @@ class TotalTokenConsumption(TokenConsumptionMetric):
     :param config: Configuration for total token consumption metric initialization.
     """
 
-    def __init__(self, config: dict[str, Any] | None = None):
+    def __init__(self, config: dict[str, Any] | None = None) -> None:
         super().__init__(config)
         self.input_total_token_count_metric = InputTotalTokenCount(config)
         self.output_total_token_count_metric = OutputTotalTokenCount(config)

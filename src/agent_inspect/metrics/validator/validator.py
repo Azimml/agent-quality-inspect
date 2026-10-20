@@ -29,7 +29,7 @@ class Validator:
     :param config: configuration for validator initialization. Default to ``None``.
     """
 
-    def __init__(self, llm_client: LLMClient, config: dict[str, Any] | None = None):
+    def __init__(self, llm_client: LLMClient, config: dict[str, Any] | None = None) -> None:
         self.config = config or {}
         self.llm_client = llm_client
 

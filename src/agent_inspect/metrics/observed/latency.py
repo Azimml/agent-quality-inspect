@@ -16,7 +16,7 @@ class LatencyMetric(ObservedMetric):
     :param config: Configuration for latency metric initialization.
     """
 
-    def __init__(self, config: dict[str, Any] | None = None):
+    def __init__(self, config: dict[str, Any] | None = None) -> None:
         super().__init__(config)
 
     @abstractmethod
@@ -38,7 +38,7 @@ class TotalLatency(LatencyMetric):
     :param config: Configuration for total latency metric initialization.
     """
 
-    def __init__(self, config: dict[str, Any] | None = None):
+    def __init__(self, config: dict[str, Any] | None = None) -> None:
         super().__init__(config)
 
     def evaluate(
@@ -73,7 +73,7 @@ class AverageLatency(LatencyMetric):
     :param config: Configuration for average latency metric initialization.
     """
 
-    def __init__(self, config: dict[str, Any] | None = None):
+    def __init__(self, config: dict[str, Any] | None = None) -> None:
         super().__init__(config)
 
     def evaluate(

@@ -16,7 +16,7 @@ class MultiSampleMetric(ABC):
         Defaults to ``None``.
     """
 
-    def __init__(self, config: dict[str, Any] | None = None):
+    def __init__(self, config: dict[str, Any] | None = None) -> None:
         self.config = config or {}
 
     @abstractmethod

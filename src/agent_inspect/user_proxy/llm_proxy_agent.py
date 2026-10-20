@@ -15,7 +15,7 @@ class LLMProxyAgent(ABC):
     :param config: configuration for LLM agent initialization. Default to ``None``.
     """
 
-    def __init__(self, llm_client: LLMClient, config: dict[str, Any] | None = None):
+    def __init__(self, llm_client: LLMClient, config: dict[str, Any] | None = None) -> None:
         self.llm_client = llm_client
         self.config = config or {}
 

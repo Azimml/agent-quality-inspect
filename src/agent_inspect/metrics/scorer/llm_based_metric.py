@@ -15,7 +15,7 @@ class LLMBasedMetric(Metric):
     :param config: configuration for metric initialization. Default to ``None``.
     """
 
-    def __init__(self, llm_client: LLMClient, config: dict[str, Any] | None = None):
+    def __init__(self, llm_client: LLMClient, config: dict[str, Any] | None = None) -> None:
         super().__init__(config)
         self.llm_client = llm_client
 

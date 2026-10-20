@@ -83,7 +83,7 @@ class ErrorAnalysis(ABC, Generic[S, R]):
         - **max_workers**: Maximum number of concurrent workers (default: 20)
     """
 
-    def __init__(self, config: dict[str, Any] | None = None):
+    def __init__(self, config: dict[str, Any] | None = None) -> None:
         self.config = config or {}
         max_workers = get_config_or_default(self.config, MAX_WORKERS_KEY, DEFAULT_MAX_WORKERS)
         self.executor = ThreadPoolExecutor(max_workers=max_workers)

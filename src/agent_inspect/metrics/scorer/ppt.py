@@ -32,7 +32,7 @@ class PPT(ProgressBasedMetric):
         - **max_turns**: Evaluate the agent up to max_turns conversation only.  For conversation shorter than ``max_turns``, the final progress score is populated up to ``max_turns``. Default to ``20``.
     """
 
-    def __init__(self, llm_client: Any, config: dict[str, Any] | None = None):
+    def __init__(self, llm_client: Any, config: dict[str, Any] | None = None) -> None:
         super().__init__(llm_client, config)
 
     def evaluate(

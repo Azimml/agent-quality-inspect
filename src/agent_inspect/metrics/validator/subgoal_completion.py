@@ -50,7 +50,7 @@ class SubGoalCompletionValidator(Validator):
         - **include_entire_prompt_in_validation_result**: a :obj:`~typing.bool` flag to indicate whether to include the entire prompt sent to LLM-as-a-judge in the SubGoalValidationResult. Use this in the debugging tool UI for display. Default to ``False``.
     """
 
-    def __init__(self, llm_client: LLMClient, config: dict[str, Any] | None = None):
+    def __init__(self, llm_client: LLMClient, config: dict[str, Any] | None = None) -> None:
         super().__init__(llm_client, config)
 
     async def validate(

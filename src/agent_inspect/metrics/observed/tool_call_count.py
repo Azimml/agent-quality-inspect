@@ -15,7 +15,7 @@ class ToolCallCount(ObservedMetric):
     :param config: Configuration for ToolCallCountMetric initialization.
     """
 
-    def __init__(self, config: dict[str, Any] | None = None):
+    def __init__(self, config: dict[str, Any] | None = None) -> None:
         super().__init__(config)
 
     def evaluate(self, agent_turn_traces: list[TurnTrace]) -> NumericalScore:

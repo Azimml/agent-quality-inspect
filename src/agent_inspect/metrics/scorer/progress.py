@@ -26,7 +26,7 @@ class ProgressBasedMetric(LLMBasedMetric):
     :param config: configuration for progress metric initialization. Default to ``None``.
     """
 
-    def __init__(self, llm_client: LLMClient, config: dict[str, Any] | None = None):
+    def __init__(self, llm_client: LLMClient, config: dict[str, Any] | None = None) -> None:
         super().__init__(llm_client, config)
 
     @abstractmethod
@@ -70,7 +70,7 @@ class ProgressScore(ProgressBasedMetric):
 
     """
 
-    def __init__(self, llm_client: LLMClient, config: dict[str, Any] | None = None):
+    def __init__(self, llm_client: LLMClient, config: dict[str, Any] | None = None) -> None:
         super().__init__(llm_client, config)
 
     def evaluate(
@@ -216,7 +216,7 @@ class ProgressScoresThroughTurns(ProgressBasedMetric):
 
     """
 
-    def __init__(self, llm_client: LLMClient, config: dict[str, Any] | None = None):
+    def __init__(self, llm_client: LLMClient, config: dict[str, Any] | None = None) -> None:
         super().__init__(llm_client, config)
 
     def evaluate(
@@ -311,7 +311,7 @@ class ProgressScoresThroughTurns(ProgressBasedMetric):
                 full_validation_results
             )
             scores.append(round(progress_turn.score, 4))
-            # TODO: store subgoal turn and type for judge_explanation incase subgoal.details is not unique
+            # TODO: store subgoal turn and type for judge_explanation in case subgoal.details is not unique
             judge_explanations = [
                 {r.sub_goal.details: r.explanations} for r in full_validation_results
             ]

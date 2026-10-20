@@ -48,7 +48,7 @@ class SubgoalErrorAnalysis(
         - **max_workers**: Maximum number of concurrent workers (default: 20)
     """
 
-    def __init__(self, llm_client: LLMClient, config: dict[str, Any] | None = None):
+    def __init__(self, llm_client: LLMClient, config: dict[str, Any] | None = None) -> None:
         super().__init__(config)
         self.llm_client = llm_client
 

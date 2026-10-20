@@ -65,7 +65,7 @@ class UnsupervisedSubgoalErrorAnalysis(SubgoalErrorAnalysis):
         >>> print(f"Discovered error categories: {error_categories}")
     """
 
-    def __init__(self, llm_client: LLMClient, config: dict[str, Any] | None = None):
+    def __init__(self, llm_client: LLMClient, config: dict[str, Any] | None = None) -> None:
         super().__init__(llm_client, config)
 
     # ==================== Algorithm-Specific Methods (implementing abstract methods) ====================

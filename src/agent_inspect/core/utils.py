@@ -72,7 +72,7 @@ def tally_votes(
 
     :param complete_cnt: Running count of "complete" votes to add to.
     :param incomplete_cnt: Running count of "incomplete" votes to add to.
-    :param invalid_cnt: Running count of unparseable votes to add to.
+    :param invalid_cnt: Running count of unparsable votes to add to.
     :param completions: The judge completion strings to tally.
     :param regex_pattern: Regex used to extract the grade from each completion.
     :param grade_choices: Two-element list of ``[positive_grade, negative_grade]``.

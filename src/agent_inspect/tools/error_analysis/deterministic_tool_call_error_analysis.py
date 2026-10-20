@@ -56,7 +56,7 @@ class DeterministicToolCallErrorAnalysis(ToolCallErrorAnalysis):
     ...     print(f"{cluster_label}: {len(validations)} errors")
     """
 
-    def __init__(self, config: dict[str, Any] | None = None):
+    def __init__(self, config: dict[str, Any] | None = None) -> None:
         super().__init__(config)
         self.error_clusters = DEFAULT_TOOL_CALL_ERROR_CLUSTERS
         self._PATTERNS = self._build_patterns_from_constants()

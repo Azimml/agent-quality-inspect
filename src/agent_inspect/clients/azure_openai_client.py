@@ -57,7 +57,7 @@ class AzureOpenAIClient(LLMClient):
     :param temperature: the temperature setting for LLM model. Default to ``0``.
     """
 
-    def __init__(self, model: str, max_tokens: int, temperature: float = 0):
+    def __init__(self, model: str, max_tokens: int, temperature: float = 0) -> None:
         self.model = model
         self.max_tokens = max_tokens
         self.chat_client = AzureOpenAI(

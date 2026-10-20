@@ -33,7 +33,7 @@ class ToolCallErrorAnalysis(
     :param error_clusters: Optional list of predefined error clusters for classification.
     """
 
-    def __init__(self, config: dict[str, Any] | None = None):
+    def __init__(self, config: dict[str, Any] | None = None) -> None:
         super().__init__(config)
 
     # ==================== Public API ====================

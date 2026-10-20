@@ -12,7 +12,7 @@ class ObservedMetric(ABC):
     :param config: configuration for metric initialization.
     """
 
-    def __init__(self, config: dict[str, Any] | None = None):
+    def __init__(self, config: dict[str, Any] | None = None) -> None:
         self.config = config or {}
 
     @abstractmethod

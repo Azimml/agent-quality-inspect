@@ -25,7 +25,7 @@ class PassHatK(MultiSampleMetric):
     :param k: Number of samples to draw (default: None, must be set before evaluation)
     """
 
-    def __init__(self, config: dict[str, Any] | None = None):
+    def __init__(self, config: dict[str, Any] | None = None) -> None:
         super().__init__(config)
 
         self.num_trials = get_config_or_default(

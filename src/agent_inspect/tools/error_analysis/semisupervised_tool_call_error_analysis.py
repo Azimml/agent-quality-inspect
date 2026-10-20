@@ -94,7 +94,7 @@ class SemisupervisedToolCallErrorAnalysis(ToolCallErrorAnalysis):
         llm_client: LLMClient,
         config: dict[str, Any] | None = None,
         error_clusters: list[ErrorCluster] | None = None,
-    ):
+    ) -> None:
         if llm_client is None:
             raise InvalidInputValueError(
                 internal_code=ErrorCode.MISSING_VALUE.value,
