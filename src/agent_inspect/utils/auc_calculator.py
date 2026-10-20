@@ -21,6 +21,7 @@ def auc(x: list[float], y: list[float]) -> float:
     Raises:
         ValueError: If lists have different lengths, less than 2 points,
                    or x is not monotonic
+
     """
     if len(x) != len(y):
         raise ValueError(f"x and y must have the same length, got {len(x)} and {len(y)}")

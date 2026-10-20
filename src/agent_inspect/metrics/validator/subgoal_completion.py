@@ -64,7 +64,6 @@ class SubGoalCompletionValidator(Validator):
         :return: a :obj:`~agent_inspect.models.metrics.validation_result.SubGoalValidationResult` object containing the judge binary score, the subgoal details, and the judge explanations.
 
         Example:
-
         >>> from agent_inspect.metrics.validator import SubGoalCompletionValidator
         >>> from agent_inspect.metrics.constants import INCLUDE_JUDGE_EXPLANATION, OPTIMIZE_JUDGE_TRIALS
         >>> from agent_inspect.clients.azure_openai_client import AzureOpenAIClient
@@ -84,6 +83,7 @@ class SubGoalCompletionValidator(Validator):
         ...     )
         ... )
         >>> print(validator_result.is_completed)
+
         """
 
         TraceValidator.validate_turn_traces_content(turn_traces)
@@ -138,7 +138,6 @@ class SubGoalCompletionValidator(Validator):
         :return: a :obj:`~agent_inspect.models.metrics.validation_result.SubGoalValidationResult` object containing the judge binary score, the subgoal details, and the judge explanations.
 
         Example:
-
         >>> from agent_inspect.metrics.validator import SubGoalCompletionValidator
         >>> from agent_inspect.metrics.constants import INCLUDE_JUDGE_EXPLANATION, OPTIMIZE_JUDGE_TRIALS
         >>> from agent_inspect.clients.azure_openai_client import AzureOpenAIClient
@@ -159,6 +158,7 @@ class SubGoalCompletionValidator(Validator):
         ...     )
         ... )
         >>> print(validator_result.is_completed)
+
         """
 
         TraceValidator.validate_turn_traces_content(turn_traces)

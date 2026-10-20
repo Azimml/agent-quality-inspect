@@ -37,10 +37,10 @@ class StatisticAnalysis:
         :raises InvalidInputValueError: If binary matrix is empty or inner lists have different lengths.
 
         Example:
-
             >>> binary_matrix = [[1, 1, 1, 1, 1], [1, 0, 1, 0, 1], [0, 0, 0, 0, 0]]
             >>> StatisticAnalysis.calculate_probabilities(binary_matrix)
             [1.0, 0.6, 0.0]
+
         """
         # Check if binary_matrix is empty
         if not binary_matrix:
@@ -83,7 +83,6 @@ class StatisticAnalysis:
         :raises InvalidInputValueError: If subgoal validations are empty or missing judge explanations.
 
         Example:
-
         >>> from agent_inspect.models.tools import SubgoalErrorAnalysisDataSample
         >>> from agent_inspect.models.metrics import SubGoalValidationResult
         >>> from agent_inspect.tools import StatisticAnalysis
@@ -105,6 +104,7 @@ class StatisticAnalysis:
         0.1
         >>> stat_result.judge_std
         0.2
+
         """
         judger_binary_matrix = []
         if not data_sample.subgoal_validations:

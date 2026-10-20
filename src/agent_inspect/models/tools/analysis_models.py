@@ -15,6 +15,7 @@ class ErrorAnalysisDataSample:
         data_sample_id: Unique identifier for the data sample
 
         agent_run_id: Optional unique identifier for the agent run
+
     """
 
     data_sample_id: int
@@ -98,6 +99,7 @@ class AnalyzedValidation:
         base_error: A description of the identified error
 
         agent_run_id: Optional unique identifier for the agent run
+
     """
 
     data_sample_id: int
@@ -149,6 +151,7 @@ class ErrorAnalysisResult(Generic[T]):
     Attributes:
         analyzed_validations_clustered_by_errors: Mapping from error cluster labels
             to lists of analyzed validations that exhibit those errors
+
     """
 
     analyzed_validations_clustered_by_errors: dict[str, list[T]]

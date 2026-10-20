@@ -46,7 +46,6 @@ class DeterministicToolCallErrorAnalysis(ToolCallErrorAnalysis):
         - **max_workers**: Maximum number of concurrent workers (default: 20)
 
     Example:
-
     >>> from agent_inspect.tools import DeterministicToolCallErrorAnalysis
     >>> from agent_inspect.models.tools import ToolCallErrorAnalysisDataSample
     >>>
@@ -54,6 +53,7 @@ class DeterministicToolCallErrorAnalysis(ToolCallErrorAnalysis):
     >>> result = analyzer.analyze_batch(tool_validation_data_samples)
     >>> for cluster_label, validations in result.analyzed_validations_clustered_by_errors.items():
     ...     print(f"{cluster_label}: {len(validations)} errors")
+
     """
 
     def __init__(self, config: dict[str, Any] | None = None) -> None:

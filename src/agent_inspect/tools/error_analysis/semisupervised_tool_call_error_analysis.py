@@ -87,6 +87,7 @@ class SemisupervisedToolCallErrorAnalysis(ToolCallErrorAnalysis):
         >>> # Inspect results
         >>> for cluster_label, validations in results.analyzed_validations_clustered_by_errors.items():
         ...     print(f"{cluster_label}: {len(validations)} errors")
+
     """
 
     def __init__(
@@ -139,6 +140,7 @@ class SemisupervisedToolCallErrorAnalysis(ToolCallErrorAnalysis):
 
         Note:
             Uses self.error_clusters from initialization for classification.
+
         """
         # Use validation explanation as base_error
         base_error = "\n".join(validation_result.explanations)

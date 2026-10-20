@@ -51,7 +51,6 @@ class ToolCorrectnessMetric(LLMBasedMetric):
         :return: a :obj:`~agent_inspect.models.metrics.metric_score.NumericalScore` containing the tool correctness score (:obj:`~typing.float`) and explanations.
 
         Example:
-
         >>> from agent_inspect.metrics.scorer import ToolCorrectnessMetric
         >>> from agent_inspect.metrics.constants import NUM_JUDGE_TRIALS
         >>> from agent_inspect.clients.azure_openai_client import AzureOpenAIClient
@@ -70,6 +69,7 @@ class ToolCorrectnessMetric(LLMBasedMetric):
         ...     evaluation_data_sample=data_sample
         ... )
         >>> print(tool_correctness_score.score)
+
         """
         tool_call_validator = ToolCallCompletionValidator(
             llm_client=self.llm_client, config=self.config

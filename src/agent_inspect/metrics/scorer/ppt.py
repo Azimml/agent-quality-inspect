@@ -48,7 +48,6 @@ class PPT(ProgressBasedMetric):
         :return: a :obj:`~agent_inspect.models.metrics.metric_score.NumericalScore` object containing PPT score, sub scores consisting of progress scores at every turn, and judge explanations.
 
         Example:
-
         >>> from agent_inspect.metrics.scorer import PPT
         >>> from agent_inspect.metrics.constants import INCLUDE_JUDGE_EXPLANATION, MAX_TURNS, OPTIMIZE_JUDGE_TRIALS
         >>> from agent_inspect.clients.azure_openai_client import AzureOpenAIClient
@@ -69,6 +68,7 @@ class PPT(ProgressBasedMetric):
         ...     evaluation_data_sample=data_sample
         ... )
         >>> print(metric_result.score)
+
         """
         progress_metric = ProgressScoresThroughTurns(self.llm_client, self.config)
         progress_scores = progress_metric.evaluate(agent_trace, evaluation_data_sample)
@@ -105,7 +105,6 @@ class PPT(ProgressBasedMetric):
         :return: a :obj:`~agent_inspect.models.metrics.metric_score.NumericalScore` object containing the PPT score.
 
         Example:
-
         >>> from agent_inspect.metrics.scorer import ProgressScoresThroughTurns, PPT
         >>> from agent_inspect.metrics.constants import INCLUDE_JUDGE_EXPLANATION, INCLUDE_VALIDATION_RESULTS, MAX_TURNS, OPTIMIZE_JUDGE_TRIALS
         >>> from agent_inspect.clients.azure_openai_client import AzureOpenAIClient
@@ -129,6 +128,7 @@ class PPT(ProgressBasedMetric):
         >>> ppt_metric = PPT(llm_client=client)
         >>> ppt_metric_result = ppt_metric.get_ppt_score_from_progress_scores(progress_rates)
         >>> print(ppt_metric_result.score)
+
         """
 
         if not progress_scores:

@@ -93,6 +93,7 @@ class SemisupervisedSubgoalErrorAnalysis(SubgoalErrorAnalysis):
         >>> custom_clusters = [APIRateLimitCluster()]
         >>> analyzer = SemisupervisedSubgoalErrorAnalysis(llm_client, error_clusters=custom_clusters)
         >>> result = analyzer.analyze_batch(data_samples)
+
     """
 
     def __init__(

@@ -86,7 +86,6 @@ class ProgressScore(ProgressBasedMetric):
         :return: a :obj:`~agent_inspect.models.metrics.metric_score.NumericalScore` object containing progress score and judge explanations.
 
         Example:
-
         >>> from agent_inspect.metrics.scorer import ProgressScore
         >>> from agent_inspect.metrics.constants import INCLUDE_JUDGE_EXPLANATION, OPTIMIZE_JUDGE_TRIALS
         >>> from agent_inspect.clients.azure_openai_client import AzureOpenAIClient
@@ -232,7 +231,6 @@ class ProgressScoresThroughTurns(ProgressBasedMetric):
         :return: a :obj:`~typing.List` [:obj:`~agent_inspect.models.metrics.metric_score.NumericalScore`]  object storing a list of progress scores at every turn until ``max_turns``.
 
         Example:
-
         >>> from agent_inspect.metrics.scorer import ProgressScoresThroughTurns
         >>> from agent_inspect.metrics.constants import INCLUDE_JUDGE_EXPLANATION, INCLUDE_VALIDATION_RESULTS, MAX_TURNS, OPTIMIZE_JUDGE_TRIALS
         >>> from agent_inspect.clients.azure_openai_client import AzureOpenAIClient

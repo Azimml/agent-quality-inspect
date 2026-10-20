@@ -60,7 +60,6 @@ class PassAtK(MultiSampleMetric):
             - If ``k_value`` is greater than ``num_trials``
 
         Example:
-
         >>> from agent_inspect.metrics.multi_samples import PassAtK
         >>> from agent_inspect.models.metrics import NumericalScore
         >>> from agent_inspect.metrics.constants import K_VALUE, NO_OF_TRIALS
@@ -71,6 +70,7 @@ class PassAtK(MultiSampleMetric):
         ...           NumericalScore(score=0)]
         >>> result = metric.compute(scores)
         >>> print(result.score)
+
         """
 
         num_trials = self.num_trials

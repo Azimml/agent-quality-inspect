@@ -251,7 +251,6 @@ class UserProxyAgent(LLMProxyAgent):
         :return: a :obj:`~agent_inspect.models.user_proxy.chat.UserProxyMessage` object containing the next user utterance. For the first user utterance, if the input variable ``chat_history`` is ``None`` and ``self.initial_message`` is not an empty string,  the method returns the ``self.initial_message`` as the initial user utterance, otherwise it generates the user utterance based on the conversation history. All subsequent user utterances are generated based on the conversation history.
 
         Example:
-
         >>> from agent_inspect.user_proxy import UserProxyAgent
         >>> from agent_inspect.models.user_proxy import ChatHistory TerminatingCondition
         >>> from agent_inspect.user_proxy.constants import USE_EXPERT_AGENT
@@ -272,6 +271,7 @@ class UserProxyAgent(LLMProxyAgent):
         >>> chat_history = ChatHistory(id=str(uuid4()), conversations=[]) # start from an empty conversation
         >>> user_response = asyncio.run(user.generate_message_from_chat_history(chat_history))
         >>> print(user_response.message_str)
+
         """
         if (not UserProxyAgent.contains_chat_history(chat_history)) and self.initial_message:
             return UserProxyMessage(message_str=self.initial_message)

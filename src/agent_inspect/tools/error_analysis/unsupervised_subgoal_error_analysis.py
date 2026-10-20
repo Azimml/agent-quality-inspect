@@ -63,6 +63,7 @@ class UnsupervisedSubgoalErrorAnalysis(SubgoalErrorAnalysis):
         >>> results = analyzer.analyze_batch(data_samples)
         >>> error_categories = list(results.analyzed_validations_clustered_by_errors.keys())
         >>> print(f"Discovered error categories: {error_categories}")
+
     """
 
     def __init__(self, llm_client: LLMClient, config: dict[str, Any] | None = None) -> None:

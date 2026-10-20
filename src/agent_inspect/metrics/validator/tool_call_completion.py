@@ -68,7 +68,6 @@ class ToolCallCompletionValidator(Validator):
         :return: a :obj:`~agent_inspect.models.metrics.validation_result.ToolCallValidationResult` indicating whether the tool call is correctly completed by the agent.
 
         Example:
-
         >>> from agent_inspect.metrics.validator import ToolCallCompletionValidator
         >>> from agent_inspect.metrics.constants import NUM_JUDGE_TRIALS, INCLUDE_JUDGE_EXPLANATION
         >>> from agent_inspect.clients.azure_openai_client import AzureOpenAIClient
@@ -88,6 +87,7 @@ class ToolCallCompletionValidator(Validator):
         ...    )
         ... )
         >>> print(validation_result.is_completed)  # True or False
+
         """
         TraceValidator.validate_turn_traces_content(agent_trace_turns)
         TraceValidator.validate_agent_trace_if_empty(agent_trace_turns)
@@ -122,7 +122,6 @@ class ToolCallCompletionValidator(Validator):
         :return: a :obj:`~agent_inspect.models.metrics.validation_result.ToolCallValidationResult` indicating whether the tool call is correctly completed by the agent.
 
         Example:
-
         >>> from agent_inspect.metrics.validator import ToolCallCompletionValidator
         >>> from agent_inspect.metrics.constants import NUM_JUDGE_TRIALS, INCLUDE_JUDGE_EXPLANATION
         >>> from agent_inspect.clients.azure_openai_client import AzureOpenAIClient
@@ -142,6 +141,7 @@ class ToolCallCompletionValidator(Validator):
         ...    )
         ... )
         >>> print(validation_result.is_completed)  # True or False
+
         """
         TraceValidator.validate_turn_traces_content(agent_trace_turns)
         TraceValidator.validate_agent_trace_if_empty(agent_trace_turns)

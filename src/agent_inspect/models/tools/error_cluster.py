@@ -22,6 +22,7 @@ class ErrorCluster(ABC):
     Attributes:
         cluster_label: Short name identifying the error type
         description: Detailed explanation of the error category
+
     """
 
     cluster_label: str
@@ -32,6 +33,7 @@ class ErrorCluster(ABC):
 
         Returns:
             Dictionary with cluster_label and description keys
+
         """
         return {"cluster_label": self.cluster_label, "description": self.description}
 

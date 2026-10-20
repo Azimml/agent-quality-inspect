@@ -33,6 +33,7 @@ def match_to_int(completion: str, regex_pattern: str, grade_choices: list[str]) 
 
     Returns:
         1 if grade matches positive_grade, 0 if matches negative_grade
+
     """
     match = re.search(regex_pattern, completion)
     if not match:

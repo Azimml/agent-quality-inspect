@@ -75,7 +75,6 @@ class SuccessBasedMetric(LLMBasedMetric):
         :return: a :obj:`~agent_inspect.models.metrics.metric_score.NumericalScore` object containing success score and sub scores consisting of progress score.
 
         Example:
-
         >>> from agent_inspect.metrics.scorer import ProgressScore, SuccessBasedMetric
         >>> from agent_inspect.metrics.constants import INCLUDE_JUDGE_EXPLANATION, OPTIMIZE_JUDGE_TRIALS
         >>> from agent_inspect.clients.azure_openai_client import AzureOpenAIClient
@@ -93,6 +92,7 @@ class SuccessBasedMetric(LLMBasedMetric):
         ... )
         >>> success_score = SuccessBasedMetric.get_success_score_from_progress_score(progress_metric_result)
         >>> print(success_score)
+
         """
         success_score = 1 if progress_score.score == 1 else 0
         return NumericalScore(
@@ -151,7 +151,6 @@ class SuccessScore(SuccessBasedMetric):
         :return: a :obj:`~agent_inspect.models.metrics.metric_score.NumericalScore` object containing success score, sub scores consisting of progress score, and judge explanations.
 
         Example:
-
         >>> from agent_inspect.metrics.scorer import SuccessScore
         >>> from agent_inspect.metrics.constants import INCLUDE_JUDGE_EXPLANATION, OPTIMIZE_JUDGE_TRIALS
         >>> from agent_inspect.clients.azure_openai_client import AzureOpenAIClient
@@ -168,6 +167,7 @@ class SuccessScore(SuccessBasedMetric):
         ...     evaluation_data_sample=data_sample
         ... )
         >>> print(metric_result.score)
+
         """
         progress_metric = ProgressScore(self.llm_client, self.config)
         result = progress_metric.evaluate(agent_trace, evaluation_data_sample)
@@ -214,7 +214,6 @@ class SuccessScoreFinalTurn(SuccessBasedMetric):
         :return: a :obj:`~agent_inspect.models.metrics.metric_score.NumericalScore` object containing success score at final turn :math:`T`, sub scores consisting of progress scores at every turn, and judge explanations.
 
         Example:
-
         >>> from agent_inspect.metrics.scorer import SuccessScoreFinalTurn
         >>> from agent_inspect.metrics.constants import INCLUDE_JUDGE_EXPLANATION, MAX_TURNS, OPTIMIZE_JUDGE_TRIALS
         >>> from agent_inspect.clients.azure_openai_client import AzureOpenAIClient
@@ -235,6 +234,7 @@ class SuccessScoreFinalTurn(SuccessBasedMetric):
         ...     evaluation_data_sample=data_sample
         ... )
         >>> print(metric_result.score)
+
         """
 
         progress_metric = ProgressScoresThroughTurns(self.llm_client, self.config)

@@ -49,7 +49,6 @@ class AUC(LLMBasedMetric):
         :return: a :obj:`~agent_inspect.models.metrics.metric_score.NumericalScore` object containing AUC score, sub scores consisting of progress scores at every turn, and judge explanations.
 
         Example:
-
         >>> from agent_inspect.metrics.scorer import AUC
         >>> from agent_inspect.metrics.constants import INCLUDE_JUDGE_EXPLANATION, MAX_TURNS, OPTIMIZE_JUDGE_TRIALS
         >>> from agent_inspect.clients.azure_openai_client import AzureOpenAIClient
@@ -70,6 +69,7 @@ class AUC(LLMBasedMetric):
         ...     evaluation_data_sample=data_sample
         ... )
         >>> print(metric_result.score)
+
         """
         progress_metric = ProgressScoresThroughTurns(self.llm_client, self.config)
         progress_scores = progress_metric.evaluate(agent_trace, evaluation_data_sample)
@@ -102,7 +102,6 @@ class AUC(LLMBasedMetric):
         :return: a :obj:`~agent_inspect.models.metrics.metric_score.NumericalScore` object containing the AUC score.
 
         Example:
-
         >>> from agent_inspect.metrics.scorer import ProgressScoresThroughTurns, AUC
         >>> from agent_inspect.metrics.constants import INCLUDE_JUDGE_EXPLANATION, INCLUDE_VALIDATION_RESULTS, MAX_TURNS, OPTIMIZE_JUDGE_TRIALS
         >>> from agent_inspect.clients.azure_openai_client import AzureOpenAIClient
@@ -126,6 +125,7 @@ class AUC(LLMBasedMetric):
         >>> auc_metric = AUC(llm_client=client)
         >>> auc_metric_result = auc_metric.get_auc_score_from_progress_scores(progress_rates)
         >>> print(auc_metric_result.score)
+
         """
 
         if not progress_scores:
