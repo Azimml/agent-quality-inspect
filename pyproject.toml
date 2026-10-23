@@ -41,7 +41,7 @@ dependencies = [
 
 [project.optional-dependencies]
 azure-openai = [
-    "openai==2.29.0",
+    "openai==3.35.1",
     "backoff==2.2.1",
 ]
 
